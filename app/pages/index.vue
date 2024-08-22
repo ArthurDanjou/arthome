@@ -13,29 +13,11 @@ onMounted(() => {
   <div class="min-h-screen flex items-center justify-center">
     <UCard class="w-full md:w-1/2">
       <template #header>
-        <div class="flex justify-between items-center">
-          <h3>Home by Arthur Danjou</h3>
-          <UButton
-            v-if="!loggedIn"
-            :external="true"
-            color="black"
-            icon="i-ph:github-logo-duotone"
-            label="Login with GitHub"
-            to="/auth/github"
-          />
-          <UButton
-            v-if="authorized"
-            color="black"
-            icon="i-ph:house-duotone"
-            label="Go Home"
-            to="/home"
-          />
-        </div>
-      </template>
-      <template #default>
         <h1 class="font-bold text-black dark:text-white text-lg space-y-2">
           Welcome to ArtHome
         </h1>
+      </template>
+      <template #default>
         <p>
           ArtHome is a private platform. You need to request access to be able to use it by asking to
           <a
@@ -45,6 +27,29 @@ onMounted(() => {
             target="_blank"
           >Arthur Danjou</a>
         </p>
+        <div v-if="!loggedIn" class="flex gap-2 mt-2">
+          <UButton
+            :external="true"
+            color="black"
+            icon="i-ph:github-logo-duotone"
+            label="GitHub"
+            to="/auth/github"
+          />
+          <UButton
+            :external="true"
+            color="red"
+            icon="i-ph:google-logo-duotone"
+            label="Google"
+            to="/auth/google"
+          />
+        </div>
+        <UButton
+          v-if="authorized"
+          color="black"
+          icon="i-ph:house-duotone"
+          label="Go Home"
+          to="/home"
+        />
         <p v-if="!authorized && loggedIn" class="text-red-500 font-medium">
           You're not authorized to access
         </p>
