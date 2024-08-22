@@ -1,0 +1,12 @@
+{
+  "name": "WorlframAlpha",
+  "url": "https://www.wolframalpha.com/",
+  "tags": [
+    {
+      "name": "maths",
+      "color": "amber"
+    }
+  ],
+  "icon": "i-vscode-icons:file-type-wolfram",
+  "color": "red"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "Twitter",
+  "url": "https://www.x.com/",
+  "tags": [
+    {
+      "name": "Social",
+      "color": "teal"
+    },
+    {
+      "name": "Perso",
+      "color": "pink"
+    }
+  ],
+  "icon": "i-ph:x-logo-duotone",
+  "color": "black"
+}

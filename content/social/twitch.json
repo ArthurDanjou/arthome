@@ -1,0 +1,16 @@
+{
+  "name": "Twitch",
+  "url": "https://www.twitch.com/",
+  "tags": [
+    {
+      "name": "Social",
+      "color": "teal"
+    },
+    {
+      "name": "Perso",
+      "color": "pink"
+    }
+  ],
+  "icon": "i-ph:twitch-logo-duotone",
+  "color": "purple"
+}

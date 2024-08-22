@@ -1,0 +1,16 @@
+{
+  "name": "ArtSite",
+  "url": "https://arthurdanjou.fr/",
+  "tags": [
+    {
+      "name": "Dev",
+      "color": "blue"
+    },
+    {
+      "name": "Perso",
+      "color": "pink"
+    }
+  ],
+  "icon": "i-ph:globe-duotone",
+  "color": "blue"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "MathDF",
+  "url": "https://mathdf.com/fr/",
+  "tags": [
+    {
+      "name": "maths",
+      "color": "amber"
+    }
+  ],
+  "icon": "i-ph:math-operations-duotone",
+  "color": "stone"
+}

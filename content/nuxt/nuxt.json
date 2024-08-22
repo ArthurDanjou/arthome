@@ -1,0 +1,15 @@
+{
+  "name": "Nuxt",
+  "url": "https://nuxt.com/",
+  "tags": [
+    {
+      "name": "Nuxt",
+      "color": "emerald"
+    }, {
+      "name": "Doc",
+      "color": "purple"
+    }
+  ],
+  "icon": "i-logos:nuxt-icon",
+  "color": "green"
+}

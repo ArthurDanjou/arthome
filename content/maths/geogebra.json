@@ -1,0 +1,12 @@
+{
+  "name": "GeoGebra Calculator",
+  "url": "https://www.geogebra.org/calculator",
+  "tags": [
+    {
+      "name": "maths",
+      "color": "amber"
+    }
+  ],
+  "icon": "i-icon-park-outline:geometric-flowers",
+  "color": "indigo"
+}

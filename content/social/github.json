@@ -1,0 +1,16 @@
+{
+  "name": "Github",
+  "url": "https://www.github.com/",
+  "tags": [
+    {
+      "name": "Social",
+      "color": "teal"
+    },
+    {
+      "name": "Perso",
+      "color": "pink"
+    }
+  ],
+  "icon": "i-ph:github-logo-duotone",
+  "color": "black"
+}

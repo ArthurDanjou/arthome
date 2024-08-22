@@ -1,0 +1,16 @@
+{
+  "name": "LinkedIn",
+  "url": "https://www.linkedin.com/",
+  "tags": [
+    {
+      "name": "Social",
+      "color": "teal"
+    },
+    {
+      "name": "Perso",
+      "color": "pink"
+    }
+  ],
+  "icon": "i-ph:linkedin-logo-duotone",
+  "color": "blue"
+}

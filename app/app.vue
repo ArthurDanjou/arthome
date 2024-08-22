@@ -3,50 +3,38 @@ useHead({
   link: [{ rel: 'icon', type: 'image/png', href: '/favicon.ico' }],
 })
 
-const head = useLocaleHead({
-  addDirAttribute: true,
-  identifierAttribute: 'id',
-  addSeoAttributes: true,
+const date = ref<Date>(new Date())
+onMounted(() => {
+  setInterval(() => date.value = new Date(), 1000)
 })
+
+const apps = await queryContent('/').find()
+const nuxt = apps.filter(app => app._dir === 'nuxt')
+const perso = apps.filter(app => app._dir === 'perso')
+const maths = apps.filter(app => app._dir === 'maths')
+const social = apps.filter(app => app._dir === 'social')
 </script>
 
 <template>
-  <Html
-    :dir="head.htmlAttrs.dir"
-    :lang="head.htmlAttrs.lang"
-  >
-    <Head>
-      <template
-        v-for="link in head.link"
-        :key="link.id"
-      >
-        <Link
-          :id="link.id"
-          :href="link.href"
-          :hreflang="link.hreflang"
-          :rel="link.rel"
-        />
-      </template>
-      <template
-        v-for="meta in head.meta"
-        :key="meta.id"
-      >
-        <Meta
-          :id="meta.id"
-          :content="meta.content"
-          :property="meta.property"
-        />
-      </template>
-    </Head>
-    <Body>
-      <div>
-        <NuxtLoadingIndicator color="#808080" />
-        <UContainer>
-          <NuxtPage />
-        </UContainer>
+  <div>
+    <NuxtLoadingIndicator color="#808080" />
+    <UContainer class="my-8">
+      <div v-if="date" class="flex flex-col items-center">
+        <h1 class="text-6xl font-bold">
+          {{ useDateFormat(date, 'HH:mm') }}
+        </h1>
+        <h1 class="text-2xl">
+          {{ useDateFormat(date, 'dddd D MMMM YYYY', { locales: () => 'fr-FR' }) }}
+        </h1>
       </div>
-    </Body>
-  </Html>
+      <div v-if="apps" class="space-y-12">
+        <Application title="Personal" :apps="perso" />
+        <Application title="Social" :apps="social" />
+        <Application title="Nuxt" :apps="nuxt" />
+        <Application title="Mathematics" :apps="maths" />
+      </div>
+    </UContainer>
+  </div>
 </template>
 
 <style>

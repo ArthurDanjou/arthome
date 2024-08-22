@@ -1,0 +1,12 @@
+{
+  "name": "Duolingo",
+  "url": "https://duolingo.com/",
+  "tags": [
+    {
+      "name": "Lang",
+      "color": "red"
+    }
+  ],
+  "icon": "i-ph:bird-duotone",
+  "color": "lime"
+}
