@@ -1,6 +1,5 @@
 {
   "name": "Office 365",
-  "primary": true,
   "url": "https://www.microsoft365.com/?auth=2",
   "tags": [
     {
