@@ -1,7 +1,7 @@
 {
   "name": "Nuxt",
-  "nuxt": "Studio",
-  "url": "https://nuxt.studio/",
+  "nuxt": "Hub",
+  "url": "https://nuxt.com/",
   "tags": [
     {
       "name": "Nuxt",
@@ -12,6 +12,6 @@
       "color": "purple"
     }
   ],
-  "icon": "i-logos:nuxt-icon",
+  "icon": "i-simple-icons:nuxtdotjs",
   "color": "green"
 }

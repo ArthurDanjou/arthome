@@ -9,7 +9,7 @@ onMounted(() => {
 })
 
 const apps = await queryContent('/').find()
-const nuxt = apps.filter(app => app._dir === 'nuxt')
+const dev = apps.filter(app => app._dir === 'dev')
 const perso = apps.filter(app => app._dir === 'perso')
 const maths = apps.filter(app => app._dir === 'maths')
 const social = apps.filter(app => app._dir === 'social')
@@ -28,7 +28,7 @@ const social = apps.filter(app => app._dir === 'social')
     <div v-if="apps" class="space-y-12">
       <Application :apps="perso" title="Personal" />
       <Application :apps="social" title="Social" />
-      <Application :apps="nuxt" title="Nuxt" />
+      <Application :apps="dev" title="Development" />
       <Application :apps="maths" title="Mathematics" />
     </div>
   </main>

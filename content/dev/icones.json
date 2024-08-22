@@ -1,0 +1,16 @@
+{
+  "name": "Icones",
+  "url": "https://icones.netlify.app/",
+  "tags": [
+    {
+      "name": "Dev",
+      "color": "blue"
+    },
+    {
+      "name": "Doc",
+      "color": "purple"
+    }
+  ],
+  "icon": "i-simple-icons:iconify",
+  "color": "gray"
+}
