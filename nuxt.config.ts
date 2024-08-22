@@ -20,16 +20,19 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/google-fonts',
     'nuxt-auth-utils',
-    "@nuxt/content",
-    "@nuxthq/studio"
+    '@nuxt/content',
+    '@nuxthq/studio',
   ],
 
   // Nuxt Hub
   hub: {
     cache: true,
-    kv: true,
-    database: true,
     analytics: true,
+  },
+
+  // Nuxt Icon
+  icon: {
+    serverBundle: 'remote',
   },
 
   // Nuxt Color Mode
@@ -48,7 +51,6 @@ export default defineNuxtConfig({
   googleFonts: {
     display: 'swap',
     families: {
-      'Inter': [400, 500, 600, 700, 800, 900],
       'DM Sans': [400, 500, 600, 700, 800, 900],
     },
   },
