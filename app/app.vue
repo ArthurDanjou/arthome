@@ -23,6 +23,11 @@ watch(loggedIn, async () => {
 function toggleColorMode() {
   colorMode.preference = colorMode.preference === 'dark' ? 'light' : 'dark'
 }
+
+defineShortcuts({
+  t: () => toggleColorMode(),
+  c: () => toggleColorMode(),
+})
 </script>
 
 <template>

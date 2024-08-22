@@ -4,12 +4,9 @@
   "private": true,
   "packageManager": "pnpm@9.5.0",
   "scripts": {
-    "build": "nuxt build",
     "dev": "nuxt dev --host",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
+    "remote": "nuxt dev --remote --host",
     "postinstall": "nuxt prepare",
-    "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "db:generate": "drizzle-kit generate"
   },

@@ -33,12 +33,9 @@ onMounted(() => {
         </div>
       </template>
       <template #default>
-        <h1 class="font-bold text-black dark:text-white text-lg">
+        <h1 class="font-bold text-black dark:text-white text-lg space-y-2">
           Welcome to ArtHome
         </h1>
-        <p v-if="!authorized && loggedIn">
-          You're not authorized to access
-        </p>
         <p>
           ArtHome is a private platform. You need to request access to be able to use it by asking to
           <a
@@ -47,6 +44,9 @@ onMounted(() => {
             rel="noopener"
             target="_blank"
           >Arthur Danjou</a>
+        </p>
+        <p v-if="!authorized && loggedIn" class="text-red-500 font-medium">
+          You're not authorized to access
         </p>
       </template>
       <template #footer>

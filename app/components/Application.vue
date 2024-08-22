@@ -12,7 +12,7 @@ defineProps<{
     <h1 class="font-bold text-xl mb-4">
       {{ title }}
     </h1>
-    <div v-if="apps" class="grid grid-cols-5 gap-4">
+    <div v-if="apps" class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4">
       <ULink v-for="app in apps" :key="app.name" :to="app.url" target="_blank">
         <UCard :ui="{ body: { base: 'space-y-4' } }">
           <div v-if="app.nuxt" class="text-xl flex gap-1 items-center">
@@ -32,7 +32,7 @@ defineProps<{
             <UBadge
               v-for="tag in app.tags"
               :key="tag.name"
-              variant="soft"
+              variant="outline"
               :label="tag.name"
               :color="tag.color"
               :ui="{ rounded: 'rounded-full' }"
