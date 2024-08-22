@@ -56,7 +56,7 @@ onMounted(() => {
       </template>
       <template #footer>
         <p class="italic text-sm">
-          No personal informations regarding your GitHub account are stored in database.
+          No personal informations regarding your account are stored in database.
         </p>
       </template>
     </UCard>
