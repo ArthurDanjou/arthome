@@ -2,7 +2,6 @@ import type { OpenWeatherType } from '~~/types/types'
 
 export default defineCachedEventHandler(async (event) => {
   const config = useRuntimeConfig(event)
-  console.log(config.openWeather)
 
   const openWeather = await $fetch<OpenWeatherType>('https://api.openweathermap.org/data/2.5/weather', {
     params: {
@@ -13,7 +12,6 @@ export default defineCachedEventHandler(async (event) => {
       units: config.openWeather.units,
     },
   })
-  console.log(openWeather)
   return {
     weather: openWeather.weather[0].description,
     city: openWeather.name,
