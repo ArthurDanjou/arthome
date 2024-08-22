@@ -37,9 +37,6 @@ defineProps<{
               <div v-else :class="`text-${app.color}-400`" class="text-xl font-medium">
                 <p>{{ app.name }}</p>
               </div>
-              <p v-if="app.description" class="text-sm text-neutral-500">
-                {{ app.description }}
-              </p>
               <div class="flex gap-2 mt-1">
                 <UBadge
                   v-for="tag in app.tags"

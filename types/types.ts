@@ -3,7 +3,6 @@ import type { ParsedContent } from '@nuxt/content'
 export interface AppType extends ParsedContent {
   primary?: boolean
   name: string
-  description?: string
   nuxt?: string
   url: string
   icon: string

@@ -1,0 +1,17 @@
+{
+  "name": "Outlook",
+  "primary": true,
+  "url": "https://outlook.office.com/mail/",
+  "tags": [
+    {
+      "name": "Studies",
+      "color": "sky"
+    },
+    {
+      "name": "Perso",
+      "color": "pink"
+    }
+  ],
+  "icon": "i-ph:microsoft-outlook-logo-duotone",
+  "color": "blue"
+}
