@@ -22,6 +22,7 @@ export default defineNuxtConfig({
     'nuxt-auth-utils',
     '@nuxt/content',
     '@nuxthq/studio',
+    "@nuxt/image"
   ],
 
   // Nuxt UI
