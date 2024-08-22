@@ -34,25 +34,27 @@ defineShortcuts({
   <div>
     <NuxtLoadingIndicator color="#808080" />
     <UContainer>
-      <div class="absolute top-2 right-2 flex gap-2">
-        <UTooltip v-if="loggedIn" text="Click to logout">
+      <ClientOnly>
+        <div class="absolute top-2 right-2 flex gap-2">
+          <UTooltip v-if="loggedIn" text="Déconnexion">
+            <UButton
+              :label="user.name"
+              color="gray"
+              square
+              trailing-icon="i-ph:person-arms-spread-duotone"
+              variant="ghost"
+              @click="clear"
+            />
+          </UTooltip>
           <UButton
-            :label="`Hello ${user.name}`"
+            :icon="$colorMode.preference === 'dark' ? 'i-ph:moon-duotone' : 'i-ph:sun-duotone'"
             color="gray"
             square
-            trailing-icon="i-ph:person-arms-spread-duotone"
             variant="ghost"
-            @click="clear"
+            @click="toggleColorMode"
           />
-        </UTooltip>
-        <UButton
-          :icon="$colorMode.preference === 'dark' ? 'i-ph:moon-duotone' : 'i-ph:sun-duotone'"
-          color="gray"
-          square
-          variant="ghost"
-          @click="toggleColorMode"
-        />
-      </div>
+        </div>
+      </ClientOnly>
       <NuxtPage />
     </UContainer>
   </div>

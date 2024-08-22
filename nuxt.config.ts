@@ -22,7 +22,8 @@ export default defineNuxtConfig({
     'nuxt-auth-utils',
     '@nuxt/content',
     '@nuxthq/studio',
-    "@nuxt/image"
+    '@nuxt/image',
+    'nuxt-mapbox',
   ],
 
   // Nuxt UI
@@ -71,8 +72,18 @@ export default defineNuxtConfig({
 
   // Nuxt Env
   runtimeConfig: {
+    openWeather: {
+      apiKey: '',
+      lat: '',
+      lon: '',
+      lang: '',
+      units: '',
+    },
     public: {
-      test: '',
+      mapbox: {
+        style: '',
+        accessToken: '',
+      },
     },
   },
 })

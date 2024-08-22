@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-  <div>
+  <section>
     <h1 class="font-bold text-xl mb-4">
       {{ title }}
     </h1>
@@ -19,7 +19,7 @@ defineProps<{
           <span class="relative inline-flex rounded-full h-4 w-4 bg-green-500" />
         </div>
         <UCard
-          :ui="{ body: { base: 'space-y-4 h-full' }, background: 'h-full duration-300 bg-white hover:bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800' }"
+          :ui="{ body: { base: 'h-full' }, background: 'h-full duration-300 bg-white hover:bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-800' }"
         >
           <div class="flex gap-4 items-center h-full">
             <UBadge :color="app.color" class="p-2" variant="soft">
@@ -51,5 +51,5 @@ defineProps<{
         </UCard>
       </ULink>
     </div>
-  </div>
+  </section>
 </template>

@@ -1,0 +1,16 @@
+{
+  "name": "HoppScotch.io",
+  "url": "https://hoppscotch.io/",
+  "tags": [
+    {
+      "name": "Dev",
+      "color": "blue"
+    },
+    {
+      "name": "Doc",
+      "color": "purple"
+    }
+  ],
+  "icon": "i-simple-icons:hoppscotch",
+  "color": "teal"
+}
