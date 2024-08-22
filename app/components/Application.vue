@@ -12,7 +12,7 @@ defineProps<{
     <h1 class="font-bold text-xl mb-4">
       {{ title }}
     </h1>
-    <div v-if="apps" class="grid grid-cols-1 auto-rows-auto sm:grid-cols-3 md:grid-cols-4 gap-8">
+    <div v-if="apps" class="grid grid-cols-1 auto-rows-auto sm:grid-cols-3 md:grid-cols-5 gap-4">
       <ULink v-for="app in apps" :key="app.name" :to="app.url" class="relative" target="_blank">
         <div v-show="app.primary === true" class="absolute flex h-4 w-4 -right-2 -top-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />

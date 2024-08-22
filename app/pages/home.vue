@@ -28,7 +28,7 @@ const social = apps.filter(app => app._dir === 'social')
       </h1>
     </div>
     <div v-if="apps" class="space-y-12 mt-12">
-      <section class="grid grid-cols-1 auto-rows-auto sm:grid-cols-3 gap-8">
+      <section class="grid grid-cols-1 auto-rows-auto sm:grid-cols-3 gap-4">
         <Weather />
         <Map />
       </section>
