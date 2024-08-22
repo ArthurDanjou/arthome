@@ -28,6 +28,7 @@ export default defineNuxtConfig({
   hub: {
     cache: true,
     analytics: true,
+    database: true,
   },
 
   // Nuxt Icon
