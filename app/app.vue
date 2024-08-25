@@ -1,27 +1,26 @@
 <script lang="ts" setup>
 useHead({
   link: [{ rel: 'icon', type: 'image/png', href: '/favicon.ico' }],
-  title: 'Home by Arthur Danjou',
+  title: 'ArtHome by Arthur Danjou',
 })
 
 const { loggedIn, clear, user } = useUserSession()
 const colorMode = useColorMode()
-const authorized = await isAuthorized()
-
-onMounted(async () => {
-  if (!authorized) {
-    navigateTo('/')
-  }
-})
 
 watch(loggedIn, async () => {
   if (!loggedIn.value) {
-    navigateTo('/')
+    navigateTo('/login')
   }
 })
 
 function toggleColorMode() {
   colorMode.preference = colorMode.preference === 'dark' ? 'light' : 'dark'
+}
+
+async function logout() {
+  await clear()
+  navigateTo('/login')
+  window.location.reload()
 }
 
 defineShortcuts({
@@ -43,7 +42,7 @@ defineShortcuts({
               square
               trailing-icon="i-ph:person-arms-spread-duotone"
               variant="ghost"
-              @click="clear"
+              @click="logout"
             />
           </UTooltip>
           <UButton

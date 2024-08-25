@@ -1,6 +1,6 @@
 {
-  "id": "0550ff2a-d819-4a38-a515-915d5ef620a6",
-  "prevId": "a8ec7e1e-1087-4ab5-be19-459dc9b0a4e0",
+  "id": "7d4e591a-f6c7-48eb-b9e8-e0e200bfea26",
+  "prevId": "0550ff2a-d819-4a38-a515-915d5ef620a6",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -18,28 +18,28 @@
           "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "''"
         },
         "name_visible": {
           "name": "name_visible",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": true
         },
         "icon": {
           "name": "icon",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "'i-ph:circle-wavy-question-duotone'"
         },
         "color": {
           "name": "color",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "'gray'"
         },
         "page_id": {
@@ -144,28 +144,28 @@
           "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "''"
         },
         "name_visible": {
           "name": "name_visible",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": true
         },
         "icon": {
           "name": "icon",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "'i-ph:circle-wavy-question-duotone'"
         },
         "color": {
           "name": "color",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "'gray'"
         },
         "category_id": {
@@ -270,29 +270,29 @@
           "name": "private",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": false
         },
         "timezone": {
           "name": "timezone",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "'undefined'"
         },
         "location": {
           "name": "location",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'undefined'"
+          "notNull": false,
+          "default": "'unknown'"
         },
         "subscription": {
           "name": "subscription",
           "type": "subscription",
           "typeSchema": "public",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "'free'"
         },
         "created_at": {

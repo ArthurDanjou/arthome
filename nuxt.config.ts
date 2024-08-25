@@ -35,7 +35,8 @@ export default defineNuxtConfig({
   hub: {
     cache: true,
     analytics: true,
-    database: true,
+    blob: true,
+    kv: true,
   },
 
   // Nuxt Icon
@@ -78,6 +79,10 @@ export default defineNuxtConfig({
       lon: '',
       lang: '',
       units: '',
+    },
+    postgres: {
+      url: '',
+      dir: './server/db',
     },
     public: {
       mapbox: {

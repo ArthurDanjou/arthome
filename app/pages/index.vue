@@ -1,64 +1,54 @@
 <script lang="ts" setup>
-const { loggedIn } = useUserSession()
-const authorized = await isAuthorized()
-
-onMounted(() => {
-  if (authorized) {
-    navigateTo('/home')
-  }
+definePageMeta({
+  middleware: 'auth',
 })
+
+const date = ref<Date>(new Date())
+onMounted(() => {
+  setInterval(() => date.value = new Date(), 1000)
+})
+
+const { user, session } = useUserSession()
+
+const { getCategories } = useCategories()
+const categories = await getCategories()
 </script>
 
 <template>
-  <div class="min-h-screen flex items-center justify-center">
-    <UCard class="w-full md:w-1/2">
-      <template #header>
-        <h1 class="font-bold text-black dark:text-white text-lg space-y-2">
-          Welcome to ArtHome
-        </h1>
-      </template>
-      <template #default>
-        <p>
-          ArtHome is a private platform. You need to request access to be able to use it by asking to
-          <a
-            class="duration-300 underline-offset-2 text-md text-black dark:text-white underline decoration-gray-300 dark:decoration-neutral-700 hover:decoration-black dark:hover:decoration-white"
-            href="mailto:arthurdanjou@outlook.fr"
-            rel="noopener"
-            target="_blank"
-          >Arthur Danjou</a>
-        </p>
-        <div v-if="!loggedIn" class="flex gap-2 mt-2">
-          <UButton
-            :external="true"
-            color="black"
-            icon="i-ph:github-logo-duotone"
-            label="GitHub"
-            to="/auth/github"
-          />
-          <UButton
-            :external="true"
-            color="red"
-            icon="i-ph:google-logo-duotone"
-            label="Google"
-            to="/auth/google"
-          />
-        </div>
-        <UButton
-          v-if="authorized"
-          color="black"
-          icon="i-ph:house-duotone"
-          label="Go Home"
-          to="/home"
+  <main v-if="user" class="my-12">
+    <div v-if="date" class="flex flex-col items-center">
+      <h1 class="text-6xl md:text-9xl font-bold">
+        {{ useDateFormat(date, 'HH') }}
+        <span class="animate-pulse">:</span>
+        {{ useDateFormat(date, 'mm') }}
+      </h1>
+      <h1 class="text-2xl md:text-5xl">
+        {{ useDateFormat(date, 'dddd D MMMM YYYY', { locales: user.language }) }}
+      </h1>
+    </div>
+    <div>
+      {{ user }}
+    </div>
+    <div>
+      {{ session }}
+    </div>
+    <div>
+      {{ user === session.user }}
+    </div>
+    <div v-if="categories">
+      {{ categories }}
+    </div>
+    <div>
+      <Category>
+        <Tab
+          :tab="{
+            name: 'Test',
+            nameVisible: true,
+            icon: 'i-ph:cloud-duotone',
+            color: 'blue',
+          }"
         />
-        <p v-if="!authorized && loggedIn" class="text-red-500 font-medium">
-          You're not authorized to access
-        </p>
-      </template>
-      <template #footer>
-        <p class="italic text-sm">
-          No personal informations regarding your account are stored in database.
-        </p>
-      </template>
-    </UCard>
-  </div>
+      </Category>
+    </div>
+  </main>
 </template>

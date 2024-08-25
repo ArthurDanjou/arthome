@@ -1,6 +1,6 @@
 {
-  "id": "0550ff2a-d819-4a38-a515-915d5ef620a6",
-  "prevId": "a8ec7e1e-1087-4ab5-be19-459dc9b0a4e0",
+  "id": "704c03b2-8d7f-47ce-a551-95289048c5f2",
+  "prevId": "d4ae60ba-5be1-4aa9-90d7-0690a599bf8e",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -18,28 +18,28 @@
           "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "''"
         },
         "name_visible": {
           "name": "name_visible",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": true
         },
         "icon": {
           "name": "icon",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "'i-ph:circle-wavy-question-duotone'"
         },
         "color": {
           "name": "color",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "'gray'"
         },
         "page_id": {
@@ -144,28 +144,28 @@
           "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "''"
         },
         "name_visible": {
           "name": "name_visible",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": true
         },
         "icon": {
           "name": "icon",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "'i-ph:circle-wavy-question-duotone'"
         },
         "color": {
           "name": "color",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "'gray'"
         },
         "category_id": {
@@ -266,33 +266,40 @@
           "notNull": false,
           "default": "''"
         },
+        "avatar": {
+          "name": "avatar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "''"
+        },
         "private": {
           "name": "private",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": false
         },
-        "timezone": {
-          "name": "timezone",
+        "language": {
+          "name": "language",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'undefined'"
+          "notNull": false,
+          "default": "'english'"
         },
         "location": {
           "name": "location",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'undefined'"
+          "notNull": false,
+          "default": "'unknown'"
         },
         "subscription": {
           "name": "subscription",
           "type": "subscription",
           "typeSchema": "public",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "'free'"
         },
         "created_at": {

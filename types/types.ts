@@ -1,5 +1,8 @@
 import type { ParsedContent } from '@nuxt/content'
 
+export const Subscription = ['free', 'paid'] as const
+
+// todo: delete
 export interface AppType extends ParsedContent {
   primary?: boolean
   name: string
