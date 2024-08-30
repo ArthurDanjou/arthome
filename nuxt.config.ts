@@ -14,7 +14,17 @@ export default defineNuxtConfig({
   },
 
   // Nuxt Modules
-  modules: ['@nuxthub/core', '@nuxt/ui', '@vueuse/nuxt', '@nuxtjs/google-fonts', 'nuxt-auth-utils', '@nuxt/content', '@nuxthq/studio', '@nuxt/image', 'nuxt-mapbox', '@pinia/nuxt'],
+  modules: [
+    '@nuxthub/core',
+    '@nuxt/ui',
+    '@vueuse/nuxt',
+    '@nuxtjs/google-fonts',
+    'nuxt-auth-utils',
+    '@nuxt/content',
+    '@nuxthq/studio',
+    '@nuxt/image',
+    'nuxt-mapbox',
+  ],
 
   // Nuxt UI
   ui: {
