@@ -5,43 +5,22 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1724455773734,
-      "tag": "0000_wild_luke_cage",
+      "when": 1724865045534,
+      "tag": "0000_giant_stranger",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1724455851539,
-      "tag": "0001_goofy_dormammu",
+      "when": 1724884620789,
+      "tag": "0001_fancy_tyger_tiger",
       "breakpoints": true
     },
     {
       "idx": 2,
       "version": "7",
-      "when": 1724456130150,
-      "tag": "0002_slim_whistler",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1724528975297,
-      "tag": "0003_curious_solo",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1724531645621,
-      "tag": "0004_sharp_shocker",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1724532003950,
-      "tag": "0005_tense_the_order",
+      "when": 1725015619221,
+      "tag": "0002_cool_dexter_bennett",
       "breakpoints": true
     }
   ]

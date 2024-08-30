@@ -7,13 +7,13 @@ const { loggedIn } = useUserSession()
 
 definePageMeta({
   middleware: 'ghost',
+  layout: 'login',
 })
 
 const schema = z.object({
   email: z.string().email('Invalid email'),
 })
 
-const form = ref()
 type Schema = z.output<typeof schema>
 const state = reactive({ email: undefined })
 
@@ -62,7 +62,7 @@ if (import.meta.server) {
       </template>
       <template #default>
         <div v-if="!loggedIn" class="flex flex-col gap-4 p-4">
-          <UForm ref="form" :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
+          <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
             <UFormGroup name="email">
               <UInput v-model="state.email" color="gray" placeholder="arthur@arthome.com" />
             </UFormGroup>

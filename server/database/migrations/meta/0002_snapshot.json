@@ -1,6 +1,6 @@
 {
-  "id": "7d4e591a-f6c7-48eb-b9e8-e0e200bfea26",
-  "prevId": "0550ff2a-d819-4a38-a515-915d5ef620a6",
+  "id": "b9aba4fe-7f04-4acc-b47f-2d29d739df98",
+  "prevId": "1a96f2ca-db04-445d-b671-d61aaeef8882",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -10,7 +10,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "serial",
           "primaryKey": true,
           "notNull": true
         },
@@ -41,55 +41,6 @@
           "primaryKey": false,
           "notNull": false,
           "default": "'gray'"
-        },
-        "page_id": {
-          "name": "page_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp (3)",
-          "primaryKey": false,
-          "notNull": false,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp (3)",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "categories_page_id_pages_id_fk": {
-          "name": "categories_page_id_pages_id_fk",
-          "tableFrom": "categories",
-          "tableTo": "pages",
-          "columnsFrom": [
-            "page_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "public.pages": {
-      "name": "pages",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true
         },
         "user_id": {
           "name": "user_id",
@@ -113,9 +64,9 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "pages_user_id_users_id_fk": {
-          "name": "pages_user_id_users_id_fk",
-          "tableFrom": "pages",
+        "categories_user_id_users_id_fk": {
+          "name": "categories_user_id_users_id_fk",
+          "tableFrom": "categories",
           "tableTo": "users",
           "columnsFrom": [
             "user_id"
@@ -136,7 +87,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "serial",
           "primaryKey": true,
           "notNull": true
         },
@@ -147,12 +98,12 @@
           "notNull": false,
           "default": "''"
         },
-        "name_visible": {
-          "name": "name_visible",
+        "primary": {
+          "name": "primary",
           "type": "boolean",
           "primaryKey": false,
           "notNull": false,
-          "default": true
+          "default": false
         },
         "icon": {
           "name": "icon",
@@ -167,6 +118,13 @@
           "primaryKey": false,
           "notNull": false,
           "default": "'gray'"
+        },
+        "link": {
+          "name": "link",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "''"
         },
         "category_id": {
           "name": "category_id",
@@ -213,7 +171,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "serial",
           "primaryKey": true,
           "notNull": true
         },
@@ -266,6 +224,13 @@
           "notNull": false,
           "default": "''"
         },
+        "avatar": {
+          "name": "avatar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "''"
+        },
         "private": {
           "name": "private",
           "type": "boolean",
@@ -273,12 +238,12 @@
           "notNull": false,
           "default": false
         },
-        "timezone": {
-          "name": "timezone",
+        "language": {
+          "name": "language",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "default": "'undefined'"
+          "default": "'en-EN'"
         },
         "location": {
           "name": "location",

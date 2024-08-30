@@ -23,53 +23,39 @@ export const users = pgTable('users', {
   ...timestamps,
 })
 
-export const pages = pgTable('pages', {
-  id,
-  userId: integer('user_id')
-    .notNull()
-    .references(() => users.id, { onDelete: 'cascade' }),
-  ...timestamps,
-})
-
 export const categories = pgTable('categories', {
   id,
   name: text('name').default(''),
   nameVisible: boolean('name_visible').default(true),
   icon: text('icon').default('i-ph:circle-wavy-question-duotone'),
   color: text('color').default('gray'),
-  pageId: integer('page_id')
+  userId: integer('user_id')
     .notNull()
-    .references(() => pages.id, { onDelete: 'cascade' }),
+    .references(() => users.id, { onDelete: 'cascade' }),
   ...timestamps,
 })
 
 export const tabs = pgTable('tabs', {
   id,
   name: text('name').default(''),
-  nameVisible: boolean('name_visible').default(true),
+  primary: boolean('primary').default(false),
   icon: text('icon').default('i-ph:circle-wavy-question-duotone'),
   color: text('color').default('gray'),
+  link: text('link').default(''),
   categoryId: integer('category_id')
     .notNull()
     .references(() => categories.id, { onDelete: 'cascade' }),
   ...timestamps,
 })
 
-export const usersRelations = relations(users, ({ one }) => ({
-  page: one(pages, {
-    fields: [users.id],
-    references: [pages.userId],
-  }),
-}))
-
-export const pagesRelations = relations(pages, ({ many }) => ({
+export const usersRelations = relations(users, ({ many }) => ({
   categories: many(categories),
 }))
 
 export const categoriesRelations = relations(categories, ({ one, many }) => ({
-  page: one(pages, {
-    fields: [categories.pageId],
-    references: [pages.id],
+  user: one(users, {
+    fields: [categories.userId],
+    references: [users.id],
   }),
   tabs: many(tabs),
 }))

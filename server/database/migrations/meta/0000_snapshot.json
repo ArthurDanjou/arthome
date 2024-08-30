@@ -1,5 +1,5 @@
 {
-  "id": "a8ec7e1e-1087-4ab5-be19-459dc9b0a4e0",
+  "id": "c52dbfc1-beae-4a41-8725-66def9fdacea",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -18,78 +18,29 @@
           "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "''"
         },
         "name_visible": {
           "name": "name_visible",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": true
         },
         "icon": {
           "name": "icon",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "'i-ph:circle-wavy-question-duotone'"
         },
         "color": {
           "name": "color",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'gray'"
-        },
-        "page_id": {
-          "name": "page_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp (3)",
-          "primaryKey": false,
           "notNull": false,
-          "default": "now()"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp (3)",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "categories_page_id_pages_id_fk": {
-          "name": "categories_page_id_pages_id_fk",
-          "tableFrom": "categories",
-          "tableTo": "pages",
-          "columnsFrom": [
-            "page_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "public.pages": {
-      "name": "pages",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
+          "default": "'gray'"
         },
         "user_id": {
           "name": "user_id",
@@ -113,9 +64,9 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "pages_user_id_users_id_fk": {
-          "name": "pages_user_id_users_id_fk",
-          "tableFrom": "pages",
+        "categories_user_id_users_id_fk": {
+          "name": "categories_user_id_users_id_fk",
+          "tableFrom": "categories",
           "tableTo": "users",
           "columnsFrom": [
             "user_id"
@@ -144,28 +95,28 @@
           "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "''"
         },
         "name_visible": {
           "name": "name_visible",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": true
         },
         "icon": {
           "name": "icon",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "'i-ph:circle-wavy-question-duotone'"
         },
         "color": {
           "name": "color",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "'gray'"
         },
         "category_id": {
@@ -266,33 +217,40 @@
           "notNull": false,
           "default": "''"
         },
+        "avatar": {
+          "name": "avatar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "''"
+        },
         "private": {
           "name": "private",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": false
         },
-        "timezone": {
-          "name": "timezone",
+        "language": {
+          "name": "language",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'undefined'"
+          "notNull": false,
+          "default": "'en-EN'"
         },
         "location": {
           "name": "location",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'undefined'"
+          "notNull": false,
+          "default": "'unknown'"
         },
         "subscription": {
           "name": "subscription",
           "type": "subscription",
           "typeSchema": "public",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "'free'"
         },
         "created_at": {

@@ -10,9 +10,3 @@ export function useDrizzle() {
   const config = useRuntimeConfig()
   return drizzle(postgres(config.postgres.url, { prepare: false }), { schema })
 }
-
-export type UserType = typeof schema.users.$inferSelect
-export type UserInsert = typeof schema.users.$inferInsert
-
-export type TabType = typeof schema.tabs.$inferSelect
-export type CategoryType = typeof schema.categories.$inferSelect

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { user, loggedIn, session, clear } = useUserSession()
+const { user, loggedIn, clear } = useUserSession()
 </script>
 
 <template>
@@ -9,9 +9,6 @@ const { user, loggedIn, session, clear } = useUserSession()
     </div>
     <div>
       LoggedIn: {{ loggedIn }}
-    </div>
-    <div>
-      Session: {{ session }}
     </div>
     <div @click="clear">
       clear

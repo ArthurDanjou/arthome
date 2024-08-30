@@ -1,6 +1,7 @@
 export default oauthGoogleEventHandler({
   config: {
     emailRequired: true,
+    scope: ['email', 'profile'],
   },
   async onSuccess(event, { user: oauthUser, tokens }) {
     const userSession = await getUserSession(event)
@@ -15,7 +16,7 @@ export default oauthGoogleEventHandler({
           googleToken: tokens.access_token,
         })
 
-        await replaceUserSession(event, {
+        await setUserSession(event, {
           id: userSession.id,
           user: userSession,
           googleId: oauthUser.sub,
@@ -35,7 +36,7 @@ export default oauthGoogleEventHandler({
         googleToken: tokens.access_token,
       })
 
-      await replaceUserSession(event, {
+      await setUserSession(event, {
         id: user.id,
         user,
       })
@@ -76,7 +77,7 @@ export default oauthGoogleEventHandler({
       subscription: 'free',
     })
 
-    await replaceUserSession(event, {
+    await setUserSession(event, {
       id: createdUser.id,
       user: createdUser,
     })
