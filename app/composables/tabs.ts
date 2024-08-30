@@ -21,7 +21,6 @@ export async function useTabs() {
   }
 
   async function updateTab(tab: UpdateTabSchema) {
-    console.log(tab)
     await $fetch(`/api/tabs/${tab.id}`, {
       method: 'PUT',
       body: JSON.stringify(tab),

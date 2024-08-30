@@ -4,7 +4,6 @@ import { UpdateTabSchema } from '~~/types/types'
 export default defineEventHandler(async (event) => {
   try {
     const { id } = await getRouterParams(event)
-    console.log(await readBody(event))
     const body = await useValidatedBody(event, UpdateTabSchema)
     await useDrizzle()
       .update(tables.tabs)

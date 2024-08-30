@@ -1,4 +1,3 @@
-import type { ParsedContent } from '@nuxt/content'
 import { z } from 'zod'
 
 export const COLORS = ['gray', 'slate', 'zinc', 'neutral', 'stone', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
@@ -59,22 +58,6 @@ export interface TabType {
   primary: boolean
   categoryId: number
   link: string
-}
-
-// todo: delete
-export interface AppType extends ParsedContent {
-  primary?: boolean
-  name: string
-  nuxt?: string
-  url: string
-  icon: string
-  color: string
-  tags: Tag[]
-}
-
-export interface Tag {
-  name: string
-  color: string
 }
 
 export interface OpenWeatherType {

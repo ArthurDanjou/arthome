@@ -17,7 +17,6 @@ const items = [
     label: 'Settings',
     icon: 'i-ph:gear-six-duotone',
     action: () => {
-      console.log('Settings')
       isSettingsOpen.value = true
     },
   }, {
