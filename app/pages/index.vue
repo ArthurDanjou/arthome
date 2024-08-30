@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { CategoryType } from '~~/types/types'
-import CategoryHeader from '~/components/CategoryHeader.vue'
 
 definePageMeta({
   middleware: 'auth',
@@ -14,6 +13,7 @@ onMounted(() => {
 const { user } = useUserSession()
 const { categories } = await useCategories()
 const { getTabsForCategory } = await useTabs()
+const { canCreateCategory } = await useUserLimit()
 
 // Modals
 const createCategoryModal = ref(false)
@@ -59,7 +59,11 @@ const items = [[
 ]]
 
 defineShortcuts({
-  c: () => createCategoryModal.value = true,
+  c: () => {
+    if (canCreateCategory()) {
+      createCategoryModal.value = true
+    }
+  },
 })
 </script>
 
@@ -77,6 +81,7 @@ defineShortcuts({
     </div>
     <div class="flex justify-end mb-8 gap-4">
       <UButton
+        v-if="canCreateCategory()"
         icon="i-ph:folder-simple-plus-duotone"
         color="black"
         variant="solid"
@@ -86,6 +91,19 @@ defineShortcuts({
         Create Category
         <UKbd>C</UKbd>
       </UButton>
+      <UTooltip v-else text="You can't create more categories on free plan. ❌">
+        <UButton
+          icon="i-ph:folder-simple-plus-duotone"
+          color="black"
+          variant="solid"
+          size="lg"
+          disabled
+          @click.prevent="createCategoryModal = true"
+        >
+          Create Category
+          <UKbd>C</UKbd>
+        </UButton>
+      </UTooltip>
     </div>
     <section v-if="categories">
       <div v-if="categories.length > 0" class="space-y-12">
@@ -93,12 +111,12 @@ defineShortcuts({
           v-for="category in categories"
           :key="category.id"
         >
-          <CategoryHeader
+          <AppCategory
             :dropdown-items="items"
             :category="category"
             @create-tab="openCreateTab(category)"
           />
-          <div v-if="getTabsForCategory(category.id).length > 0" class="grid grid-cols-1 auto-rows-auto sm:grid-cols-3 md:grid-cols-5 gap-4">
+          <div v-if="getTabsForCategory(category.id).length > 0" class="grid grid-cols-1 auto-rows-auto sm:grid-cols-3 md:grid-cols-4 gap-4">
             <AppTab
               v-for="tab in getTabsForCategory(category.id)"
               :key="tab.id"

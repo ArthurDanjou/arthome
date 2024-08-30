@@ -8,5 +8,5 @@ export const tables = schema
 
 export function useDrizzle() {
   const config = useRuntimeConfig()
-  return drizzle(postgres(config.postgres.url, { prepare: false }), { schema })
+  return drizzle(postgres(config.postgres.url, { prepare: false, max: 50 }), { schema })
 }

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
 const { user, loggedIn, clear } = useUserSession()
-
 const isSettingsOpen = ref(false)
 
+const isDark = computed(() => colorMode.preference === 'dark')
 const items = [
   [{
     slot: 'account',
@@ -13,26 +13,28 @@ const items = [
     label: 'Home',
     icon: 'i-ph:house-line-duotone',
     action: () => navigateTo('/'),
+    shortcut: 'H',
   }, {
     label: 'Settings',
     icon: 'i-ph:gear-six-duotone',
-    action: () => {
-      isSettingsOpen.value = true
-    },
+    action: () => isSettingsOpen.value = true,
+    shortcut: 'S',
   }, {
-    label: 'Profile',
-    icon: 'i-ph:person-arms-spread-duotone',
-    action: () => navigateTo('/profile'),
+    label: isDark.value ? 'Light mode' : 'Dark mode',
+    icon: isDark.value ? 'i-ph:moon-duotone' : 'i-ph:sun-duotone',
+    action: () => toggleColorMode(),
+    shortcut: 'T',
   }],
   [{
     slot: 'logout',
     label: 'Sign out',
     icon: 'i-ph:sign-out-bold',
+    shortcut: 'L',
   }],
 ]
 
 function toggleColorMode() {
-  colorMode.preference = colorMode.preference === 'dark' ? 'light' : 'dark'
+  colorMode.preference = isDark.value ? 'light' : 'dark'
 }
 
 async function logout() {
@@ -43,6 +45,8 @@ async function logout() {
 
 defineShortcuts({
   t: () => toggleColorMode(),
+  s: () => isSettingsOpen.value = !isSettingsOpen.value,
+  l: async () => await logout(),
 })
 </script>
 
@@ -58,7 +62,13 @@ defineShortcuts({
           </h1>
           <div class="flex items-center gap-2">
             <ClientOnly>
-              <UDropdown v-if="loggedIn" :items="items" mode="hover" :ui="{ item: { disabled: 'cursor-text select-text' } }" :popper="{ placement: 'bottom-start' }">
+              <UDropdown
+                v-if="loggedIn"
+                :items="items"
+                mode="hover"
+                :ui="{ item: { disabled: 'cursor-text select-text' } }"
+                :popper="{ placement: 'bottom-end' }"
+              >
                 <UAvatar :src="user.avatar" />
 
                 <template #account>
@@ -74,26 +84,28 @@ defineShortcuts({
 
                 <template #item="{ item }">
                   <div class="w-full flex justify-between items-center" @click.prevent="item.action()">
-                    <span class="truncate">{{ item.label }}</span>
-                    <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto" />
+                    <div class="gap-2 flex items-center">
+                      <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto" />
+                      <span class="truncate">{{ item.label }}</span>
+                    </div>
+                    <UKbd v-if="item.shortcut">
+                      {{ item.shortcut }}
+                    </UKbd>
                   </div>
                 </template>
 
                 <template #logout="{ item }">
                   <div class="w-full flex justify-between items-center" @click="logout()">
-                    <span class="truncate">{{ item.label }}</span>
-                    <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto" />
+                    <div class="flex gap-2 items-center">
+                      <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500" />
+                      <span class="truncate">{{ item.label }}</span>
+                    </div>
+                    <UKbd v-if="item.shortcut">
+                      {{ item.shortcut }}
+                    </UKbd>
                   </div>
                 </template>
               </UDropdown>
-              <UButton
-                :icon="$colorMode.preference === 'dark' ? 'i-ph:moon-duotone' : 'i-ph:sun-duotone'"
-                color="gray"
-                square
-                size="md"
-                variant="ghost"
-                @click="toggleColorMode"
-              />
             </clientonly>
           </div>
         </div>
@@ -111,10 +123,12 @@ defineShortcuts({
         </template>
 
         <template #default>
-          Hey
-          Delete account
-          Change user details
-          {{ user }}
+          <div class="space-y-12">
+            <div>
+              Delete account
+              Change user details
+            </div>
+          </div>
         </template>
       </UCard>
     </USlideover>

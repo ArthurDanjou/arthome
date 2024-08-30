@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
         name: body.name,
         icon: body.icon,
         color: body.color,
-        nameVisible: body.nameVisible,
+        primary: body.primary,
         link: body.link,
       })
       .where(

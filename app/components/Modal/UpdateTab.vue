@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from '#ui/types'
-import type { COLORS, TabType, UpdateTabSchemaType } from '~~/types/types'
-import { UpdateTabSchema } from '~~/types/types'
+import type { TabType, UpdateTabSchemaType } from '~~/types/types'
+import { COLORS, UpdateTabSchema } from '~~/types/types'
 
 const props = defineProps<{
   tab: TabType | null
@@ -10,13 +10,14 @@ const props = defineProps<{
 const emit = defineEmits(['closeModal'])
 const { categories } = await useCategories()
 const { updateTab } = await useTabs()
+const { loading, search } = useIcons()
 
 const state = reactive({
-  name: props.tab?.name,
-  icon: props.tab?.icon,
-  color: props.tab?.color,
-  primary: props.tab?.primary,
-  categoryId: props.tab?.categoryId,
+  name: undefined,
+  icon: undefined,
+  color: COLORS[0],
+  primary: undefined,
+  categoryId: undefined,
 })
 
 watchEffect(() => {
@@ -65,7 +66,31 @@ async function handleUpdate(event: FormSubmitEvent<UpdateTabSchemaType>) {
           </UFormGroup>
 
           <UFormGroup label="Icon " name="icon">
-            <UInput v-model="state.icon" type="text" />
+            <USelectMenu
+              v-model="state.icon"
+              :loading="loading"
+              :searchable="search"
+              placeholder="Select an icon"
+              searchable-placeholder="Search an icon"
+            >
+              <template #label>
+                <div v-if="state.icon" class="flex items-center gap-2">
+                  <UIcon size="20" :name="`i-${state.icon}`" />
+                  <span class="truncate">{{ state.icon }}</span>
+                </div>
+              </template>
+
+              <template #option="{ option }">
+                <div class="flex items-center gap-2">
+                  <UIcon size="20" :name="`i-${option}`" />
+                  <span class="truncate">{{ option }}</span>
+                </div>
+              </template>
+
+              <template #empty>
+                Enter an icon name, keyword or tag
+              </template>
+            </USelectMenu>
           </UFormGroup>
 
           <UFormGroup label="Category " name="category">

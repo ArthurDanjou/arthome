@@ -20,6 +20,8 @@ async function handleCreate(event: FormSubmitEvent<CreateCategorySchemaType>) {
   state.icon = undefined
   state.name = undefined
 }
+
+const { loading, search } = useIcons()
 </script>
 
 <template>
@@ -42,11 +44,35 @@ async function handleCreate(event: FormSubmitEvent<CreateCategorySchemaType>) {
       <template #default>
         <UForm :schema="CreateCategorySchema" :state="state" class="space-y-4" @submit="handleCreate">
           <UFormGroup label="Name" name="name">
-            <UInput v-model="state.name" type="text" variant="outline" />
+            <UInput v-model="state.name" placeholder="Enter name" type="text" variant="outline" />
           </UFormGroup>
 
-          <UFormGroup label="Icon " name="icon" help="Get icon from the Phosphor Collection">
-            <UInput v-model="state.icon" type="text" variant="outline" />
+          <UFormGroup label="Icon " name="icon">
+            <USelectMenu
+              v-model="state.icon"
+              :loading="loading"
+              :searchable="search"
+              placeholder="Select an icon"
+              searchable-placeholder="Search an icon"
+            >
+              <template #label>
+                <div v-if="state.icon" class="flex items-center gap-2">
+                  <UIcon size="20" :name="`i-${state.icon}`" />
+                  <span class="truncate">{{ state.icon }}</span>
+                </div>
+              </template>
+
+              <template #option="{ option }">
+                <div class="flex items-center gap-2">
+                  <UIcon size="20" :name="`i-${option}`" />
+                  <span class="truncate">{{ option }}</span>
+                </div>
+              </template>
+
+              <template #empty>
+                Enter an icon name, keyword or tag
+              </template>
+            </USelectMenu>
           </UFormGroup>
 
           <UFormGroup label="Color " name="color">

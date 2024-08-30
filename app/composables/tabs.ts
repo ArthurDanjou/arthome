@@ -1,4 +1,4 @@
-import type { CreateTabSchema, TabType, UpdateTabSchema } from '~~/types/types'
+import type { CreateTabSchema, type TabType, UpdateTabSchema } from '~~/types/types'
 
 export async function useTabs() {
   const { data: tabs, refresh }
@@ -32,6 +32,21 @@ export async function useTabs() {
       .catch(error => useErrorToast('Tab update failed!', `Error: ${error}`))
   }
 
+  async function setTabPrimary(tab, primary: boolean) {
+    await $fetch(`/api/tabs/${tab.id}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        primary,
+        categoryId: tab.categoryId,
+      }),
+    })
+      .then(async () => {
+        await refresh()
+        useSuccessToast('Tab favorite toggled with success!')
+      })
+      .catch(error => useErrorToast('Cannot toggle Tab favorite!', `Error: ${error}`))
+  }
+
   async function deleteTab(id: number) {
     await $fetch(`/api/tabs/${id}`, {
       method: 'DELETE',
@@ -47,5 +62,6 @@ export async function useTabs() {
     deleteTab,
     getTabsForCategory,
     updateTab,
+    setTabPrimary,
   }
 }

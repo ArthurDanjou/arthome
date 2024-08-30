@@ -5,8 +5,16 @@ defineProps<{
   tab: TabType
 }>()
 
+const { setTabPrimary } = await useTabs()
+
 // DropDown Items
 const items = [[
+  {
+    label: 'Toggle favorite',
+    icon: 'i-ph:star-duotone',
+    color: 'yellow',
+    click: tab => setTabPrimary(tab, !tab.primary),
+  },
   {
     label: 'Edit',
     icon: 'i-ph:pencil-duotone',
@@ -56,12 +64,12 @@ function openDeleteTabModal(tab: TabType) {
       <div class="flex items-center justify-between h-full">
         <div class="flex gap-4 items-center h-full">
           <UBadge :color="tab.color" class="p-2" variant="soft">
-            <UIcon :name="`i-ph:${tab.icon}`" size="32" />
+            <UIcon :name="tab.icon" size="32" />
           </UBadge>
           <div class="flex flex-col gap-1">
-            <div :class="`text-${tab.color}-400`" class="text-xl font-medium">
-              <p>{{ tab.name }}</p>
-            </div>
+            <p :class="`text-${tab.color}-400`" class="text-xl font-medium truncate">
+              {{ tab.name }}
+            </p>
           </div>
         </div>
         <UDropdown
@@ -71,8 +79,10 @@ function openDeleteTabModal(tab: TabType) {
         >
           <UButton
             color="gray"
-            variant="soft"
-            icon="i-ph:dots-three-outline-vertical-duotone"
+            variant="ghost"
+            :padded="false"
+            size="sm"
+            icon="i-ph:dots-three-outline-duotone"
           />
 
           <template #item="{ item }">

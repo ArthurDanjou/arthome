@@ -4,7 +4,7 @@ export async function useCategories() {
   const { data: categories, refresh }
     = await useAsyncData<CategoryType[]>(async () => await useRequestFetch()('/api/categories'))
 
-  async function getCategory(id: number) {
+  async function getCategory(id: number): CategoryType {
     return categories.data.value.find(category => category.id === id)
   }
 
