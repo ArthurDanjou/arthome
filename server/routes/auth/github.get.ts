@@ -3,28 +3,6 @@ export default oauthGitHubEventHandler({
     emailRequired: true,
   },
   async onSuccess(event, { user: oauthUser, tokens }) {
-    const userSession = await getUserSession(event)
-
-    // If the user is already signed in, link the account
-    if (userSession?.id) {
-      const user = await findUserById(userSession.id)
-
-      if (user) {
-        await updateUser(userSession.id, {
-          githubId: oauthUser.id,
-          githubToken: tokens.access_token,
-        })
-
-        await setUserSession(event, {
-          id: userSession.id,
-          user: userSession,
-          githubId: oauthUser.id,
-        })
-
-        return sendRedirect(event, '/')
-      }
-    }
-
     // If the user is not signed in, search for an existing user with that GitHub ID
     // If it exists, sign in as that user and refresh the token
     let user = await findUserByGitHubId(oauthUser.id)
@@ -35,7 +13,7 @@ export default oauthGitHubEventHandler({
         githubToken: tokens.access_token,
       })
 
-      await setUserSession(event, {
+      await replaceUserSession(event, {
         id: user.id,
         user,
       })
@@ -76,9 +54,9 @@ export default oauthGitHubEventHandler({
       subscription: 'free',
     })
 
-    await setUserSession(event, {
+    await replaceUserSession(event, {
       id: createdUser.id,
-      user: createdUser,
+      user: createdUser[0],
     })
 
     return sendRedirect(event, '/')

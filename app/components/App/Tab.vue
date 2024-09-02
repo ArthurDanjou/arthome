@@ -69,7 +69,7 @@ function visitLink() {
       <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" :class="`bg-${tab.color}-400`" />
       <span class="relative inline-flex rounded-full h-3 w-3" :class="`bg-${tab.color}-400`" />
     </div>
-    <div class="flex items-center justify-between h-full">
+    <div class="flex items-center justify-between h-full z-20">
       <div class="flex gap-4 items-center h-full">
         <UBadge :color="tab.color" class="p-2" variant="soft">
           <UIcon :name="tab.icon" size="32" />
@@ -83,7 +83,7 @@ function visitLink() {
       <UDropdown
         :items="items"
         :popper="{ placement: 'bottom-end', arrow: true }"
-        :ui="{ container: 'z-50 group', width: 'w-40', shadow: 'shadow-2xl', wrapper: 'absolute inline-flex -top-3 -right-3' }"
+        :ui="{ container: 'z-40 group', width: 'w-40', shadow: 'shadow-2xl', wrapper: 'absolute inline-flex -top-3 -right-3' }"
       >
         <UButton
           v-show="editMode"

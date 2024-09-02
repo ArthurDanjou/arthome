@@ -10,12 +10,16 @@ export async function useUserLimits() {
   function canCreateCategory() {
     if (hasPaidPlan.value)
       return true
+    if (!userLimits.value.categories)
+      return false
     return userLimits.value.categories.length < MAX_CATEGORIES
   }
 
   function canCreateTabInCategory(categoryId: number): boolean {
     if (hasPaidPlan.value)
       return true
+    if (!userLimits.value.categories || !userLimits.value.categories.find(category => category.id === categoryId))
+      return false
     return userLimits.value.categories.find(category => category.id === categoryId).tabs.length < MAX_TABS_PER_CATEGORY
   }
 

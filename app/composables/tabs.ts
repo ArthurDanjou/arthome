@@ -18,7 +18,7 @@ export async function useTabs() {
       useSuccessToast('Tab successfully created!', tab.color)
     }
     catch (error) {
-      useErrorToast('Tab creation failed!', error as string)
+      useErrorToast('Tab creation failed!', String(error))
     }
   }
 
@@ -32,7 +32,7 @@ export async function useTabs() {
       useSuccessToast('Tab successfully updated!')
     }
     catch (error) {
-      useErrorToast('Tab update failed!', error as string)
+      useErrorToast('Tab update failed!', String(error))
     }
   }
 
@@ -49,7 +49,7 @@ export async function useTabs() {
       useSuccessToast(`Tab ${tab.name} ${primary ? 'set as favorite' : 'unset as favorite'}!`, 'yellow')
     }
     catch (error) {
-      useErrorToast('Cannot toggle favorite state for tab!', error as string)
+      useErrorToast('Cannot toggle favorite state for tab!', String(error))
     }
   }
 
@@ -62,7 +62,7 @@ export async function useTabs() {
       useSuccessToast('Tab successfully deleted!')
     }
     catch (error) {
-      useErrorToast('Tab deletion failed!', error as string)
+      useErrorToast('Tab deletion failed!', String(error))
     }
   }
 

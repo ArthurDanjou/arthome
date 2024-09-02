@@ -1,15 +1,6 @@
 import type { SQL } from 'drizzle-orm'
 import type { UserInsert } from '~~/server/utils/db'
 
-export async function findUserById(userId: number) {
-  return useDrizzle()
-    .query
-    .users
-    .findFirst({
-      where: eq(tables.users.id, userId),
-    })
-}
-
 export async function findUserByGitHubId(githubId: number) {
   return useDrizzle()
     .query
@@ -41,18 +32,21 @@ export async function createUser(user: UserInsert) {
   return useDrizzle()
     .insert(tables.users)
     .values(user)
+    .onConflictDoNothing()
     .returning()
 }
 
 export async function updateUser(userId: number, user: Partial<UserInsert>) {
   await useDrizzle()
     .update(tables.users)
-    .set(user)
+    .set({
+      ...user,
+    })
     .where(eq(tables.users.id, userId))
 }
 
 export async function deleteProfilePicture(avatar: string) {
-  if (avatar.startsWith('avatars/')) {
+  if (avatar.startsWith('avatars')) {
     await hubBlob().del(avatar)
   }
 }

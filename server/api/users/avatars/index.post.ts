@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
 
   const avatar = await hubBlob().put(filename, file, {
     addRandomSuffix: false,
-    prefix: 'avatars/',
+    prefix: 'avatars',
   })
 
   const updatedUser = {

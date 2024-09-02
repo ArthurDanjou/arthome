@@ -1,16 +1,16 @@
 export async function useUser() {
-  const { fetch } = useUserSession()
+  const { fetch, session } = useUserSession()
 
   async function deleteAvatar() {
     try {
-      await useRequestFetch()('/api/users/avatars', {
+      await $fetch('/api/users/avatars', {
         method: 'DELETE',
       })
       useSuccessToast('Avatar successfully deleted!')
       await fetch()
     }
     catch (error) {
-      useErrorToast('An error occurred while deleting your avatar', error as string)
+      useErrorToast('An error occurred while deleting your avatar', String(error))
     }
   }
 
@@ -24,7 +24,7 @@ export async function useUser() {
     formData.append('file', file)
 
     try {
-      await useRequestFetch()('/api/users/avatars', {
+      await $fetch('/api/users/avatars', {
         method: 'POST',
         body: formData,
       })
@@ -32,12 +32,29 @@ export async function useUser() {
       useSuccessToast('Avatar successfully uploaded!')
     }
     catch (error) {
-      useErrorToast('An error occurred while uploading your avatar', error as string)
+      useErrorToast('An error occurred while uploading your avatar', String(error))
+    }
+  }
+
+  async function updateUser(user: Partial<UserInsert>) {
+    try {
+      await $fetch('/api/users/me', {
+        method: 'PATCH',
+        body: JSON.stringify(user),
+      })
+      console.log(session.value)
+      await fetch()
+      console.log(session.value)
+      useSuccessToast('User successfully updated!')
+    }
+    catch (error) {
+      useErrorToast('An error occurred while updating your user', String(error))
     }
   }
 
   return {
     deleteAvatar,
     uploadAvatar,
+    updateUser,
   }
 }

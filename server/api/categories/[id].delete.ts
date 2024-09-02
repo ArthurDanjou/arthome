@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
       .where(
         and(
           eq(tables.categories.id, id),
-          eq(tables.categories.userId, user.id),
+          eq(tables.categories.userId, user.user.id),
         ),
       )
     return { statusCode: 200 }

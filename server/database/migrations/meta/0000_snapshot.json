@@ -1,5 +1,5 @@
 {
-  "id": "37cfa6b0-d0e9-4999-9ead-06b419388528",
+  "id": "21470761-4c33-4588-be9b-4927bbcbfe2c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -50,16 +50,17 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "timestamp (3)",
+          "type": "timestamp(0) with time zone",
           "primaryKey": false,
           "notNull": false,
           "default": "now()"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "timestamp (3)",
+          "type": "timestamp(0) with time zone",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": "now()"
         }
       },
       "indexes": {},
@@ -134,16 +135,17 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "timestamp (3)",
+          "type": "timestamp(0) with time zone",
           "primaryKey": false,
           "notNull": false,
           "default": "now()"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "timestamp (3)",
+          "type": "timestamp(0) with time zone",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": "now()"
         }
       },
       "indexes": {},
@@ -262,16 +264,17 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "timestamp (3)",
+          "type": "timestamp(0) with time zone",
           "primaryKey": false,
           "notNull": false,
           "default": "now()"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "timestamp (3)",
+          "type": "timestamp(0) with time zone",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": "now()"
         }
       },
       "indexes": {},

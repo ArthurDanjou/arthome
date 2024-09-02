@@ -4,28 +4,6 @@ export default oauthGoogleEventHandler({
     scope: ['email', 'profile'],
   },
   async onSuccess(event, { user: oauthUser, tokens }) {
-    const userSession = await getUserSession(event)
-
-    // If the user is already signed in, link the account
-    if (userSession?.id) {
-      const user = await findUserById(userSession.id)
-
-      if (user) {
-        await updateUser(userSession.id, {
-          googleId: oauthUser.sub,
-          googleToken: tokens.access_token,
-        })
-
-        await setUserSession(event, {
-          id: userSession.id,
-          user: userSession,
-          googleId: oauthUser.sub,
-        })
-
-        return sendRedirect(event, '/')
-      }
-    }
-
     // If the user is not signed in, search for an existing user with that Google ID
     // If it exists, sign in as that user and refresh the token
     let user = await findUserByGoogleId(oauthUser.sub)
@@ -36,7 +14,7 @@ export default oauthGoogleEventHandler({
         googleToken: tokens.access_token,
       })
 
-      await setUserSession(event, {
+      await replaceUserSession(event, {
         id: user.id,
         user,
       })
@@ -77,9 +55,9 @@ export default oauthGoogleEventHandler({
       subscription: 'free',
     })
 
-    await setUserSession(event, {
+    await replaceUserSession(event, {
       id: createdUser.id,
-      user: createdUser,
+      user: createdUser[0],
     })
 
     return sendRedirect(event, '/')

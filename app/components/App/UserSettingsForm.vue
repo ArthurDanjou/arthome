@@ -28,27 +28,18 @@ watchEffect(() => {
   state.email = props.user.email
 })
 
-async function handleUpdate(event: FormSubmitEvent<UpdateUserSchemaType>) {
-  try {
-    await useRequestFetch()(`/api/users/me`, {
-      method: 'PUT',
-      body: JSON.stringify({
-        username: event.data.username,
-        name: event.data.name,
-        description: event.data.description,
-        location: event.data.location,
-        language: event.data.language,
-        private: event.data.private,
-      }),
-    })
-    useSuccessToast('Profile successfully updated!')
-  }
-  catch (error) {
-    useErrorToast('Profile update failed!', error as string)
-  }
-}
+const { deleteAvatar, uploadAvatar, updateUser } = await useUser()
 
-const { deleteAvatar, uploadAvatar } = await useUser()
+async function handleUpdate(event: FormSubmitEvent<UpdateUserSchemaType>) {
+  await updateUser({
+    username: event.data.username,
+    name: event.data.name,
+    description: event.data.description,
+    location: event.data.location,
+    language: event.data.language,
+    private: event.data.private,
+  })
+}
 </script>
 
 <template>

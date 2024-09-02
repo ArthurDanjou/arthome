@@ -10,7 +10,7 @@ onMounted(() => {
   setInterval(() => date.value = new Date(), 1000)
 })
 
-const { user } = await useUserSession()
+const { user, loggedIn } = await useUserSession()
 const { categories } = await useCategories()
 const { getTabsForCategory } = await useTabs()
 const { canCreateCategory } = await useUserLimits()
@@ -94,7 +94,7 @@ defineShortcuts({
 </script>
 
 <template>
-  <main v-if="user" class="my-12">
+  <main v-if="user && loggedIn" class="my-12">
     <div v-if="date" class="flex flex-col items-center mb-12">
       <h1 class="text-6xl md:text-9xl font-bold">
         {{ useDateFormat(date, 'HH') }}

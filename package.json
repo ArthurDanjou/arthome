@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nuxt dev --host",
     "remote": "nuxt dev --remote --host",
-    "postinstall": "nuxt prepare",
+    "postinstall": "nuxt prepare && node script.cjs",
     "lint:fix": "eslint . --fix",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
@@ -14,9 +14,7 @@
     "db:pull": "drizzle-kit pull"
   },
   "dependencies": {
-    "@nuxt/content": "^2.13.2",
     "@nuxt/image": "^1.7.1",
-    "@nuxthq/studio": "^2.0.3",
     "@nuxthub/core": "^0.7.7",
     "@nuxtjs/google-fonts": "^3.2.0",
     "drizzle-orm": "^0.33.0",
@@ -37,9 +35,7 @@
     "dotenv": "^16.4.5",
     "drizzle-kit": "^0.24.2",
     "eslint": "^9.9.1",
-    "mapbox-gl": "^3.6.0",
     "nuxt": "^3.13.0",
-    "nuxt-mapbox": "^1.6.0",
     "typescript": "^5.5.4",
     "vue-tsc": "^2.0.29",
     "wrangler": "^3.72.3"

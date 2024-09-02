@@ -1,5 +1,5 @@
 export default defineEventHandler(async (event) => {
-  const { user, session } = await requireUserSession(event)
+  const { user } = await requireUserSession(event)
 
   if (!user.avatar) {
     return sendNoContent(event, 204)

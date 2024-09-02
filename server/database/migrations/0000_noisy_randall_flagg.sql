@@ -11,8 +11,8 @@ CREATE TABLE IF NOT EXISTS "categories" (
 	"icon" text DEFAULT 'i-ph:circle-wavy-question-duotone',
 	"color" text DEFAULT 'gray',
 	"user_id" integer NOT NULL,
-	"created_at" timestamp (3) DEFAULT now(),
-	"updated_at" timestamp (3)
+	"created_at" timestamp(0) with time zone DEFAULT now(),
+	"updated_at" timestamp(0) with time zone DEFAULT now()
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "tabs" (
@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS "tabs" (
 	"color" text DEFAULT 'gray',
 	"link" text DEFAULT '',
 	"category_id" integer NOT NULL,
-	"created_at" timestamp (3) DEFAULT now(),
-	"updated_at" timestamp (3)
+	"created_at" timestamp(0) with time zone DEFAULT now(),
+	"updated_at" timestamp(0) with time zone DEFAULT now()
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
@@ -42,8 +42,8 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"language" text DEFAULT 'en-EN',
 	"location" text DEFAULT 'unknown',
 	"subscription" "subscription" DEFAULT 'free',
-	"created_at" timestamp (3) DEFAULT now(),
-	"updated_at" timestamp (3),
+	"created_at" timestamp(0) with time zone DEFAULT now(),
+	"updated_at" timestamp(0) with time zone DEFAULT now(),
 	CONSTRAINT "users_username_unique" UNIQUE("username"),
 	CONSTRAINT "users_email_unique" UNIQUE("email"),
 	CONSTRAINT "users_github_id_unique" UNIQUE("github_id"),

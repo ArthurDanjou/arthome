@@ -24,10 +24,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/google-fonts',
     'nuxt-auth-utils',
-    '@nuxt/content',
-    '@nuxthq/studio',
     '@nuxt/image',
-    'nuxt-mapbox',
   ],
 
   // Nuxt UI
@@ -77,22 +74,9 @@ export default defineNuxtConfig({
 
   // Nuxt Env
   runtimeConfig: {
-    openWeather: {
-      apiKey: '',
-      lat: '',
-      lon: '',
-      lang: '',
-      units: '',
-    },
     postgres: {
       url: '',
       dir: './server/db',
-    },
-    public: {
-      mapbox: {
-        style: '',
-        accessToken: '',
-      },
     },
   },
 })

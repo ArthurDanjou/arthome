@@ -14,7 +14,7 @@ export async function useCategories() {
       await useSuccessToast('Category successfully created!', category.color)
     }
     catch (error) {
-      useErrorToast('Category creation failed!', error as string)
+      useErrorToast('Category creation failed!', String(error))
     }
   }
 
@@ -28,7 +28,7 @@ export async function useCategories() {
       await useSuccessToast('Category successfully updated!')
     }
     catch (error) {
-      useErrorToast('Category update failed!', error as string)
+      useErrorToast('Category update failed!', String(error))
     }
   }
 
@@ -41,7 +41,7 @@ export async function useCategories() {
       await useSuccessToast('Category successfully deleted!')
     }
     catch (error) {
-      useErrorToast('Category deletion failed!', error as string)
+      useErrorToast('Category deletion failed!', String(error))
     }
   }
 

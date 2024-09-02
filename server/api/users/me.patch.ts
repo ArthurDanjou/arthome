@@ -11,7 +11,10 @@ export default defineEventHandler(async (event) => {
   }
 
   await updateUser(user.id, updatedUser)
-  await replaceUserSession(event, updatedUser)
+  await setUserSession(event, {
+    id: user.id,
+    user: updatedUser,
+  })
 
   return sendNoContent(event, 204)
 })

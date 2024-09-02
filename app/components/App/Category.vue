@@ -30,7 +30,7 @@ const { canCreateTabInCategory } = await useUserLimits()
       <UDropdown
         :items="dropdownItems"
         :popper="{ placement: 'bottom-end', arrow: true }"
-        :ui="{ width: 'w-40', shadow: 'shadow-xl' }"
+        :ui="{ container: 'group z-50', width: 'w-40', shadow: 'shadow-xl' }"
       >
         <UButton
           color="white"
