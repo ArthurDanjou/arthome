@@ -26,5 +26,10 @@ export default defineAppConfig({
         },
       },
     },
+    avatar: {
+      size: {
+        '5xl': 'h-24 w-24 text-5xl',
+      },
+    },
   },
 })

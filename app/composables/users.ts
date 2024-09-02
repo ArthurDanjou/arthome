@@ -42,9 +42,7 @@ export async function useUser() {
         method: 'PATCH',
         body: JSON.stringify(user),
       })
-      console.log(session.value)
       await fetch()
-      console.log(session.value)
       useSuccessToast('User successfully updated!')
     }
     catch (error) {

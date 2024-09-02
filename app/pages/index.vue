@@ -105,6 +105,19 @@ defineShortcuts({
         {{ useDateFormat(date, 'dddd D MMMM YYYY', { locales: user.language }) }}
       </h1>
     </div>
+    <section class="flex flex-col md:flex-row items-center justify-center md:w-2/3 mx-auto gap-4 md:gap-8">
+      <div>
+        <AppAvatar size="5xl" :src="user.avatar" />
+      </div>
+      <div class="space-y-4">
+        <h1 class="font-bold text-4xl tracking-wide">
+          {{ user.name }}
+        </h1>
+        <h3 class="text-xl">
+          {{ user.description }}
+        </h3>
+      </div>
+    </section>
     <div class="flex justify-end mb-8 gap-4">
       <UButton
         v-if="canCreateCategory()"

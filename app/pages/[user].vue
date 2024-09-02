@@ -26,6 +26,11 @@ onMounted(() => {
     useErrorToast('This user\'s profile is private.', 'Look for another user.')
   }
 })
+
+function visitLink(link: string) {
+  window.open(link, '_blank')
+  // todo: add view count
+}
 </script>
 
 <template>
@@ -63,6 +68,19 @@ onMounted(() => {
       />
     </div>
     <section v-else>
+      <section class="flex flex-col md:flex-row items-center justify-center md:w-2/3 mx-auto gap-4 md:gap-8">
+        <div>
+          <AppAvatar size="5xl" :src="userDetails.avatar" />
+        </div>
+        <div class="space-y-4">
+          <h1 class="font-bold text-4xl tracking-wide">
+            {{ userDetails.name }}
+          </h1>
+          <h3 class="text-xl">
+            {{ userDetails.description }}
+          </h3>
+        </div>
+      </section>
       <div v-if="userDetails.categories.length > 0" class="space-y-12">
         <div
           v-for="category in userDetails.categories"
@@ -77,10 +95,35 @@ onMounted(() => {
             </div>
           </div>
           <div
-            v-if="userDetails.categories.filter(tab => tab.categoryId === category.id).length > 0"
+            v-if="category.tabs.filter(tab => tab.categoryId === category.id).length > 0"
             class="grid grid-cols-1 auto-rows-auto sm:grid-cols-3 gap-4"
           >
-            {{ userDetails.categories.filter(tab => tab.categoryId === category.id) }}
+            <UCard
+              v-for="tab in category.tabs.filter(tab => tab.categoryId === category.id)"
+              :key="tab.id"
+              :ui="{
+                body: { base: 'cursor-pointer h-full relative z-20' },
+                background: 'h-full duration-300 bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800',
+              }"
+              @click.prevent="visitLink(tab.link)"
+            >
+              <div v-show="tab.primary" class="absolute flex h-3 w-3 -left-1 -top-1">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" :class="`bg-${tab.color}-400`" />
+                <span class="relative inline-flex rounded-full h-3 w-3" :class="`bg-${tab.color}-400`" />
+              </div>
+              <div class="flex items-center justify-between h-full z-20">
+                <div class="flex gap-4 items-center h-full">
+                  <UBadge :color="tab.color" class="p-2" variant="soft">
+                    <UIcon :name="tab.icon" size="32" />
+                  </UBadge>
+                  <div class="flex flex-col gap-1">
+                    <p :class="`text-${tab.color}-400`" class="text-xl font-medium truncate">
+                      {{ tab.name }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </UCard>
           </div>
           <div v-else class="flex gap-2 items-center">
             <UIcon name="i-ph:empty-duotone" size="16" />

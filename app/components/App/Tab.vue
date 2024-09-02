@@ -51,7 +51,7 @@ function openDeleteTabModal(tab: TabType) {
 function visitLink() {
   if (!props.editMode) {
     window.open(props.tab.link, '_blank')
-    // add view count
+    // todo: add view count
   }
 }
 </script>
