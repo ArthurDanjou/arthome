@@ -5,6 +5,7 @@ import { COLORS, CreateCategorySchema } from '~~/types/types'
 
 const emit = defineEmits(['closeModal'])
 const { createCategory } = await useCategories()
+const { refreshUserLimits, canCreateCategory } = await useUserLimits()
 const state = reactive({
   name: undefined,
   icon: undefined,
@@ -14,6 +15,12 @@ const state = reactive({
 
 async function handleCreate(event: FormSubmitEvent<CreateCategorySchemaType>) {
   await createCategory(event.data)
+  await refreshUserLimits()
+
+  if (!canCreateCategory()) {
+    useErrorToast('You have reach the limit of categories', 'Subscribe to a paid plan to create more categories')
+  }
+
   emit('closeModal')
   state.color = COLORS[0]
   state.nameVisible = true
@@ -34,7 +41,7 @@ const { loading, search } = useIcons()
           </h3>
           <UButton
             color="gray"
-            variant="soft"
+            variant="ghost"
             icon="i-heroicons-x-mark-20-solid"
             class="p-1"
             @click="$emit('closeModal')"

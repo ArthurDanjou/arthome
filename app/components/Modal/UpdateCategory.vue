@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { COLORS, type CategoryType, UpdateCategorySchema } from '~~/types/types'
+import type { CategoryType, UpdateCategorySchemaType } from '~~/types/types'
+import { COLORS, UpdateCategorySchema } from '~~/types/types'
 import type { FormSubmitEvent } from '#ui/types'
 
 const props = defineProps<{
@@ -24,7 +25,7 @@ watchEffect(() => {
   state.nameVisible = props.category?.nameVisible
 })
 
-async function handleUpdate(event: FormSubmitEvent<UpdateCategorySchema>) {
+async function handleUpdate(event: FormSubmitEvent<UpdateCategorySchemaType>) {
   await updateCategory({
     id: props.category!.id,
     ...event.data,
@@ -43,7 +44,7 @@ async function handleUpdate(event: FormSubmitEvent<UpdateCategorySchema>) {
           </h3>
           <UButton
             color="gray"
-            variant="soft"
+            variant="ghost"
             icon="i-heroicons-x-mark-20-solid"
             class="p-1"
             @click="$emit('closeModal')"

@@ -10,3 +10,5 @@ export function useDrizzle() {
   const config = useRuntimeConfig()
   return drizzle(postgres(config.postgres.url, { prepare: false, max: 50 }), { schema })
 }
+
+export type UserInsert = typeof schema.users.$inferInsert

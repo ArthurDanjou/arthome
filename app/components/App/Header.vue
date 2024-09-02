@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
-const { user, loggedIn, clear } = useUserSession()
+const { user, loggedIn, clear } = await useUserSession()
 const isSettingsOpen = ref(false)
 
 const isDark = computed(() => colorMode.preference === 'dark')
@@ -33,20 +33,21 @@ const items = [
   }],
 ]
 
-function toggleColorMode() {
-  colorMode.preference = isDark.value ? 'light' : 'dark'
-}
-
 async function logout() {
   await clear()
-  navigateTo('/login')
+  await navigateTo('/')
   window.location.reload()
+}
+
+function toggleColorMode() {
+  colorMode.preference = isDark.value ? 'light' : 'dark'
 }
 
 defineShortcuts({
   t: () => toggleColorMode(),
   s: () => isSettingsOpen.value = !isSettingsOpen.value,
   l: async () => await logout(),
+  h: () => navigateTo('/'),
 })
 </script>
 
@@ -69,7 +70,7 @@ defineShortcuts({
                 :ui="{ item: { disabled: 'cursor-text select-text' } }"
                 :popper="{ placement: 'bottom-end' }"
               >
-                <UAvatar :src="user.avatar" />
+                <AppAvatar :src="user.avatar" />
 
                 <template #account>
                   <div class="text-left">
@@ -95,7 +96,7 @@ defineShortcuts({
                 </template>
 
                 <template #logout="{ item }">
-                  <div class="w-full flex justify-between items-center" @click="logout()">
+                  <div class="w-full flex justify-between items-center" @click="logout">
                     <div class="flex gap-2 items-center">
                       <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500" />
                       <span class="truncate">{{ item.label }}</span>
@@ -123,12 +124,22 @@ defineShortcuts({
         </template>
 
         <template #default>
-          <div class="space-y-12">
+          <div class="space-y-12 overflow-auto">
             <div>
-              Delete account
-              Change user details
+              <AppUserSettingsForm :user="user" />
             </div>
           </div>
+        </template>
+
+        <template #footer>
+          <UButton
+            color="red"
+            variant="solid"
+            icon="i-ph:trash-duotone"
+            block
+          >
+            Delete account
+          </UButton>
         </template>
       </UCard>
     </USlideover>

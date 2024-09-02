@@ -7,7 +7,7 @@ export const subscriptionEnum = pgEnum('subscription', Subscription)
 
 export const users = pgTable('users', {
   id,
-  username: text('username').notNull(),
+  username: text('username').notNull().unique(),
   name: text('name').notNull(),
   email: text('email').notNull().unique(),
   githubId: text('github_id').unique(),
@@ -58,4 +58,11 @@ export const categoriesRelations = relations(categories, ({ one, many }) => ({
     references: [users.id],
   }),
   tabs: many(tabs),
+}))
+
+export const tabsRelations = relations(tabs, ({ one }) => ({
+  category: one(categories, {
+    fields: [tabs.categoryId],
+    references: [categories.id],
+  }),
 }))

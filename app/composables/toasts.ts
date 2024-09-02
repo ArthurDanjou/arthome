@@ -1,10 +1,10 @@
-export function useSuccessToast(title: string, description?: string) {
+export function useSuccessToast(title: string, color?: string, description?: string) {
   const toast = useToast()
 
   toast.add({
     title,
     description,
-    color: 'green',
+    color: color || 'green',
     icon: 'i-ph:check-circle-duotone',
   })
 }

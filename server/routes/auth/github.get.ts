@@ -63,14 +63,14 @@ export default oauthGitHubEventHandler({
 
     // If the user is not signed in and no user exists with that GitHub ID or email address, create a new user
     const createdUser = await createUser({
-      username: oauthUser.login as string,
+      username: oauthUser.login.toLowerCase() as string,
       description: oauthUser.bio as string,
       name: oauthUser.name as string,
       email: oauthUser.email as string,
       avatar: oauthUser.avatar_url as string,
       githubId: oauthUser.id as number,
       githubToken: tokens.access_token as string,
-      language: 'en-US',
+      language: 'en-EN',
       location: 'unknown',
       private: false,
       subscription: 'free',

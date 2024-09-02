@@ -45,14 +45,14 @@ export async function createUser(user: UserInsert) {
 }
 
 export async function updateUser(userId: number, user: Partial<UserInsert>) {
-  return useDrizzle()
+  await useDrizzle()
     .update(tables.users)
     .set(user)
     .where(eq(tables.users.id, userId))
 }
 
 export async function deleteProfilePicture(avatar: string) {
-  if (avatar.startsWith('profile-pictures/')) {
-    await hubBlob().delete(avatar)
+  if (avatar.startsWith('avatars/')) {
+    await hubBlob().del(avatar)
   }
 }

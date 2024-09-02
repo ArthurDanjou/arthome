@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import type { CategoryType } from '~~/types/types'
 
 definePageMeta({
@@ -10,10 +10,10 @@ onMounted(() => {
   setInterval(() => date.value = new Date(), 1000)
 })
 
-const { user } = useUserSession()
+const { user } = await useUserSession()
 const { categories } = await useCategories()
 const { getTabsForCategory } = await useTabs()
-const { canCreateCategory } = await useUserLimit()
+const { canCreateCategory } = await useUserLimits()
 
 // Modals
 const createCategoryModal = ref(false)
@@ -42,13 +42,22 @@ function openCreateTab(category: CategoryType) {
   createTabModal.value = true
 }
 
+// Edit Tabs
+const currentEditCategory = ref<CategoryType | null>(null)
+
 // DropDown Items
 const items = [[
   {
-    label: 'Edit',
+    label: 'Edit Category',
     icon: 'i-ph:pencil-duotone',
     color: 'green',
     click: category => openUpdateCategoryModal(category),
+  },
+  {
+    label: 'Edit Tabs',
+    icon: 'i-ph:cards-three-duotone',
+    color: 'amber',
+    click: category => currentEditCategory.value?.id === category.id ? currentEditCategory.value = null : currentEditCategory.value = category,
   },
   {
     label: 'Delete',
@@ -62,6 +71,23 @@ defineShortcuts({
   c: () => {
     if (canCreateCategory()) {
       createCategoryModal.value = true
+    }
+  },
+  escape: () => {
+    if (createCategoryModal.value) {
+      createCategoryModal.value = false
+    }
+    if (updateCategoryModal.value) {
+      updateCategoryModal.value = false
+    }
+    if (deleteCategoryModal.value) {
+      deleteCategoryModal.value = false
+    }
+    if (createTabModal.value) {
+      createTabModal.value = false
+    }
+    if (currentEditCategory.value) {
+      currentEditCategory.value = null
     }
   },
 })
@@ -116,11 +142,15 @@ defineShortcuts({
             :category="category"
             @create-tab="openCreateTab(category)"
           />
-          <div v-if="getTabsForCategory(category.id).length > 0" class="grid grid-cols-1 auto-rows-auto sm:grid-cols-3 md:grid-cols-4 gap-4">
+          <div
+            v-if="getTabsForCategory(category.id).length > 0"
+            class="grid grid-cols-1 auto-rows-auto sm:grid-cols-3 gap-4"
+          >
             <AppTab
               v-for="tab in getTabsForCategory(category.id)"
               :key="tab.id"
               :tab="tab"
+              :edit-mode="currentEditCategory?.id === category.id"
             />
           </div>
           <div v-else class="flex gap-2 items-center">

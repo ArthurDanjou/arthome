@@ -18,6 +18,7 @@ const state = reactive({
   color: COLORS[0],
   primary: undefined,
   categoryId: undefined,
+  link: undefined,
 })
 
 watchEffect(() => {
@@ -26,6 +27,7 @@ watchEffect(() => {
   state.color = props.tab?.color
   state.primary = props.tab?.primary
   state.categoryId = props.tab?.categoryId
+  state.link = props.tab?.link
 })
 
 async function handleUpdate(event: FormSubmitEvent<UpdateTabSchemaType>) {
@@ -44,11 +46,11 @@ async function handleUpdate(event: FormSubmitEvent<UpdateTabSchemaType>) {
       <template #header>
         <div class="flex items-center justify-between">
           <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
-            Update category '{{ tab.name }}'
+            Update tab '{{ tab.name }}'
           </h3>
           <UButton
             color="gray"
-            variant="soft"
+            variant="ghost"
             icon="i-heroicons-x-mark-20-solid"
             class="p-1"
             @click="$emit('closeModal')"
@@ -95,6 +97,10 @@ async function handleUpdate(event: FormSubmitEvent<UpdateTabSchemaType>) {
 
           <UFormGroup label="Category " name="category">
             <USelect v-model="state.categoryId" :options="categories" option-attribute="name" value-attribute="id" />
+          </UFormGroup>
+
+          <UFormGroup label="Link " name="link">
+            <UInput v-model="state.link" type="text" />
           </UFormGroup>
 
           <UFormGroup>

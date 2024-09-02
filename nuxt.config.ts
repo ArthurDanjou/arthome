@@ -3,6 +3,10 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-08-21',
 
+  devServer: {
+    host: '127.0.0.1',
+  },
+
   // Nuxt App
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
@@ -41,7 +45,7 @@ export default defineNuxtConfig({
 
   // Nuxt Icon
   icon: {
-    serverBundle: 'remote',
+    serverBundle: ['ph', 'heroicons'],
   },
 
   // Nuxt Color Mode

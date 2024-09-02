@@ -1,28 +1,12 @@
 <script lang="ts" setup>
-import { z } from 'zod'
 import { useSession } from 'h3'
-import type { FormSubmitEvent } from '#ui/types'
 
-const { loggedIn } = useUserSession()
+const { loggedIn } = await useUserSession()
 
 definePageMeta({
   middleware: 'ghost',
   layout: 'login',
 })
-
-const schema = z.object({
-  email: z.string().email('Invalid email'),
-})
-
-type Schema = z.output<typeof schema>
-const state = reactive({ email: undefined })
-
-async function onSubmit(event: FormSubmitEvent<Schema>) {
-  // Do something with data
-  // todo: add login logic
-  console.log(event.data)
-  state.email = ''
-}
 
 const message = useState<string>('message')
 if (import.meta.server) {
@@ -62,20 +46,6 @@ if (import.meta.server) {
       </template>
       <template #default>
         <div v-if="!loggedIn" class="flex flex-col gap-4 p-4">
-          <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
-            <UFormGroup name="email">
-              <UInput v-model="state.email" color="gray" placeholder="arthur@arthome.com" />
-            </UFormGroup>
-            <UButton
-              :external="true"
-              color="gray"
-              icon="i-ph:envelope-duotone"
-              label="Continue with Email"
-              block
-              type="submit"
-            />
-          </UForm>
-          <UDivider label="or" />
           <UButton
             :external="true"
             color="gray"

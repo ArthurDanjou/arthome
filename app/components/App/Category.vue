@@ -7,7 +7,7 @@ defineProps<{
 }>()
 defineEmits(['createTab'])
 
-const { canCreateTabInCategory } = await useUserLimit()
+const { canCreateTabInCategory } = await useUserLimits()
 </script>
 
 <template>

@@ -7,9 +7,11 @@ const props = defineProps<{
 
 const emit = defineEmits(['closeModal'])
 const { deleteTab } = await useTabs()
+const { refreshUserLimits } = await useUserLimits()
 
 async function handleDelete() {
   await deleteTab(props.tab.id)
+  await refreshUserLimits()
   emit('closeModal')
 }
 
@@ -28,7 +30,7 @@ defineShortcuts({
           </h3>
           <UButton
             color="gray"
-            variant="soft"
+            variant="ghost"
             icon="i-heroicons-x-mark-20-solid"
             class="p-1"
             @click="$emit('closeModal')"

@@ -6,11 +6,8 @@ export default defineEventHandler(async (event) => {
     const user = await getUserSession(event)
     const body = await useValidatedBody(event, CreateCategorySchema)
     await useDrizzle().insert(tables.categories).values({
-      name: body.name,
-      icon: body.icon,
-      color: body.color,
-      nameVisible: body.nameVisible,
       userId: user.id,
+      ...body,
     })
     return { statusCode: 200 }
   }

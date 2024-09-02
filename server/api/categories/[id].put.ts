@@ -8,12 +8,7 @@ export default defineEventHandler(async (event) => {
     const body = await useValidatedBody(event, UpdateCategorySchema)
     await useDrizzle()
       .update(tables.categories)
-      .set({
-        name: body.name,
-        icon: body.icon,
-        color: body.color,
-        nameVisible: body.nameVisible,
-      })
+      .set(body)
       .where(
         and(
           eq(tables.categories.id, id),

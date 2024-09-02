@@ -7,13 +7,7 @@ export default defineEventHandler(async (event) => {
     const body = await useValidatedBody(event, UpdateTabSchema)
     await useDrizzle()
       .update(tables.tabs)
-      .set({
-        name: body.name,
-        icon: body.icon,
-        color: body.color,
-        primary: body.primary,
-        link: body.link,
-      })
+      .set(body)
       .where(
         and(
           eq(tables.tabs.id, id),

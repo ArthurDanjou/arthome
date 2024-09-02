@@ -4,7 +4,7 @@ useHead({
   title: 'ArtHome by Arthur Danjou',
 })
 
-const { loggedIn } = useUserSession()
+const { loggedIn } = await useUserSession()
 
 watch(loggedIn, async () => {
   if (!loggedIn.value) {

@@ -9,51 +9,61 @@ export async function useTabs() {
   }
 
   async function createTab(tab: CreateTabSchema) {
-    await $fetch('/api/tabs', {
-      method: 'POST',
-      body: JSON.stringify(tab),
-    })
-      .then(async () => {
-        await refresh()
-        useSuccessToast('Tab successfully created!')
+    try {
+      await $fetch('/api/tabs', {
+        method: 'POST',
+        body: JSON.stringify(tab),
       })
-      .catch(error => useErrorToast('Tab creation failed!', `Error: ${error}`))
+      await refresh()
+      useSuccessToast('Tab successfully created!', tab.color)
+    }
+    catch (error) {
+      useErrorToast('Tab creation failed!', error as string)
+    }
   }
 
   async function updateTab(tab: UpdateTabSchema) {
-    await $fetch(`/api/tabs/${tab.id}`, {
-      method: 'PUT',
-      body: JSON.stringify(tab),
-    })
-      .then(async () => {
-        await refresh()
-        useSuccessToast('Tab successfully updated!')
+    try {
+      await $fetch(`/api/tabs/${tab.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(tab),
       })
-      .catch(error => useErrorToast('Tab update failed!', `Error: ${error}`))
+      await refresh()
+      useSuccessToast('Tab successfully updated!')
+    }
+    catch (error) {
+      useErrorToast('Tab update failed!', error as string)
+    }
   }
 
   async function setTabPrimary(tab, primary: boolean) {
-    await $fetch(`/api/tabs/${tab.id}`, {
-      method: 'PUT',
-      body: JSON.stringify({
-        primary,
-        categoryId: tab.categoryId,
-      }),
-    })
-      .then(async () => {
-        await refresh()
-        useSuccessToast('Tab favorite toggled with success!')
+    try {
+      await $fetch(`/api/tabs/${tab.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          primary,
+          categoryId: tab.categoryId,
+        }),
       })
-      .catch(error => useErrorToast('Cannot toggle Tab favorite!', `Error: ${error}`))
+      await refresh()
+      useSuccessToast(`Tab ${tab.name} ${primary ? 'set as favorite' : 'unset as favorite'}!`, 'yellow')
+    }
+    catch (error) {
+      useErrorToast('Cannot toggle favorite state for tab!', error as string)
+    }
   }
 
   async function deleteTab(id: number) {
-    await $fetch(`/api/tabs/${id}`, {
-      method: 'DELETE',
-    })
-      .catch(error => useErrorToast('Tab deletion failed!', `Error: ${error}`))
-    await refresh()
-    useSuccessToast('Tab successfully deleted!')
+    try {
+      await $fetch(`/api/tabs/${id}`, {
+        method: 'DELETE',
+      })
+      await refresh()
+      useSuccessToast('Tab successfully deleted!')
+    }
+    catch (error) {
+      useErrorToast('Tab deletion failed!', error as string)
+    }
   }
 
   return {

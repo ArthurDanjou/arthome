@@ -8,6 +8,7 @@ const props = defineProps<{
 
 const emit = defineEmits(['closeModal'])
 const { createTab } = await useTabs()
+const { refreshUserLimits, canCreateTabInCategory } = await useUserLimits()
 const { categories } = await useCategories()
 
 const state = reactive({
@@ -24,7 +25,16 @@ watchEffect(() => {
 })
 
 async function handleCreate(event: FormSubmitEvent<CreateTabSchemaType>) {
-  await createTab(event.data)
+  await createTab({
+    primary: Boolean(event.data.primary),
+    ...event.data,
+  })
+  await refreshUserLimits()
+
+  if (!canCreateTabInCategory(state.categoryId)) {
+    useErrorToast('You have reach the limit of tabs in this category', 'Subscribe to a paid plan to create more tabs')
+  }
+
   emit('closeModal')
   state.name = undefined
   state.icon = undefined
@@ -47,7 +57,7 @@ const { loading, search } = useIcons()
           </h3>
           <UButton
             color="gray"
-            variant="soft"
+            variant="ghost"
             icon="i-heroicons-x-mark-20-solid"
             class="p-1"
             @click="$emit('closeModal')"

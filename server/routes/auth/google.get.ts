@@ -64,14 +64,14 @@ export default oauthGoogleEventHandler({
 
     // If the user is not signed in and no user exists with that Google ID or email address, create a new user
     const createdUser = await createUser({
-      username: oauthUser.name as string,
+      username: oauthUser.name.toLowerCase() as string,
       description: '',
       name: `${oauthUser.given_name} ${oauthUser.family_name}`,
       email: oauthUser.email as string,
       avatar: oauthUser.picture as string,
       googleId: oauthUser.sub as number,
       googleToken: tokens.access_token as string,
-      language: 'en-US',
+      language: 'en-EN',
       location: 'unknown',
       private: false,
       subscription: 'free',
