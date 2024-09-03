@@ -43,7 +43,7 @@ export default defineNuxtConfig({
 
   // Nuxt Icon
   icon: {
-    serverBundle: ['ph', 'heroicons', 'vscode-icons'],
+    serverBundle: ['ph', 'heroicons', 'vscode-icons', 'simple-icons'],
   },
 
   // Nuxt Color Mode
