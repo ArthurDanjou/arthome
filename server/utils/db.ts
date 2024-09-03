@@ -1,5 +1,4 @@
-import postgres from 'postgres'
-import { drizzle } from 'drizzle-orm/postgres-js'
+import { drizzle } from 'drizzle-orm/d1'
 import * as schema from '../database/schema'
 
 export { sql, eq, and, or, asc, desc, sum, isNull } from 'drizzle-orm'
@@ -7,8 +6,7 @@ export { sql, eq, and, or, asc, desc, sum, isNull } from 'drizzle-orm'
 export const tables = schema
 
 export function useDrizzle() {
-  const config = useRuntimeConfig()
-  return drizzle(postgres(config.postgres.url, { prepare: false, max: 50 }), { schema })
+  return drizzle(hubDatabase(), { schema })
 }
 
 export type UserInsert = typeof schema.users.$inferInsert

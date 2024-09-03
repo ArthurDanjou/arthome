@@ -2,8 +2,8 @@ const fs = require('node:fs')
 const path = require('node:path')
 
 const filesToModify = [
-  'node_modules/drizzle-orm/pg-core/columns/timestamp.js',
-  'node_modules/drizzle-orm/pg-core/columns/timestamp.cjs',
+  'node_modules/drizzle-orm/sqlite-core/columns/integer.js',
+  'node_modules/drizzle-orm/sqlite-core/columns/integer.cjs',
 ]
 
 filesToModify.forEach((file) => {
@@ -13,8 +13,8 @@ filesToModify.forEach((file) => {
   if (fs.existsSync(filePath)) {
     let fileContent = fs.readFileSync(filePath, 'utf8')
     fileContent = fileContent.replace(
-      'return value.toISOString()',
-      'return value',
+      'value.getTime()',
+      'value',
     )
     fs.writeFileSync(filePath, fileContent, 'utf8')
     console.log(`Modified: ${file}`)

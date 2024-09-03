@@ -1,11 +1,15 @@
-import { serial, timestamp } from 'drizzle-orm/pg-core'
-/**
- * A centralized list of standardized Drizzle ORM schema field definitions to prevent duplication errors
- */
+import { integer } from 'drizzle-orm/sqlite-core'
 
-export const createdAt = timestamp('created_at', { mode: 'string', withTimezone: true, precision: 0 }).defaultNow()
-export const updatedAt = timestamp('updated_at', { mode: 'string', withTimezone: true, precision: 0 }).defaultNow().$onUpdateFn(() => sql`(current_timestamp)`)
-export const id = serial('id').primaryKey()
+export const id = integer('id').primaryKey()
+
+export const createdAt
+  = integer('created_at', { mode: 'timestamp' })
+    .$defaultFn(() => new Date())
+
+export const updatedAt
+  = integer('updated_at', { mode: 'timestamp' })
+    .$onUpdateFn(() => new Date())
+    .$defaultFn(() => new Date())
 
 export const timestamps = {
   createdAt,

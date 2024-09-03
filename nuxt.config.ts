@@ -38,6 +38,7 @@ export default defineNuxtConfig({
     analytics: true,
     blob: true,
     kv: true,
+    database: true,
   },
 
   // Nuxt Icon

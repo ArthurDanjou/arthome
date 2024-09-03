@@ -1,11 +1,9 @@
-import { boolean, integer, pgEnum, pgTable, text } from 'drizzle-orm/pg-core'
+import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 import { relations } from 'drizzle-orm'
 import { id, timestamps } from '../utils/dbFields'
 import { Subscription } from '../../types/types'
 
-export const subscriptionEnum = pgEnum('subscription', Subscription)
-
-export const users = pgTable('users', {
+export const users = sqliteTable('users', {
   id,
   username: text('username').notNull().unique(),
   name: text('name').notNull(),
@@ -16,17 +14,17 @@ export const users = pgTable('users', {
   googleToken: text('google_token'),
   description: text('description').default(''),
   avatar: text('avatar').default(''),
-  private: boolean('private').default(false),
+  private: integer('private', { mode: 'boolean' }).default(false),
   language: text('language').default('en-EN'),
   location: text('location').default('unknown'),
-  subscription: subscriptionEnum('subscription').default('free'),
+  subscription: text('subscription', { enum: Subscription }).default('free'),
   ...timestamps,
 })
 
-export const categories = pgTable('categories', {
+export const categories = sqliteTable('categories', {
   id,
   name: text('name').default(''),
-  nameVisible: boolean('name_visible').default(true),
+  nameVisible: integer('name_visible', { mode: 'boolean' }).default(true),
   icon: text('icon').default('i-ph:circle-wavy-question-duotone'),
   color: text('color').default('gray'),
   userId: integer('user_id')
@@ -35,10 +33,10 @@ export const categories = pgTable('categories', {
   ...timestamps,
 })
 
-export const tabs = pgTable('tabs', {
+export const tabs = sqliteTable('tabs', {
   id,
   name: text('name').default(''),
-  primary: boolean('primary').default(false),
+  primary: integer('primary', { mode: 'boolean' }).default(false),
   icon: text('icon').default('i-ph:circle-wavy-question-duotone'),
   color: text('color').default('gray'),
   link: text('link').default(''),
