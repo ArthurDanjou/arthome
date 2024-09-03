@@ -1,3 +1,5 @@
+import { IconsCollection } from './types/types'
+
 export default defineNuxtConfig({
   future: { compatibilityVersion: 4 },
 
@@ -43,7 +45,7 @@ export default defineNuxtConfig({
 
   // Nuxt Icon
   icon: {
-    serverBundle: ['ph', 'heroicons', 'vscode-icons', 'simple-icons'],
+    serverBundle: IconsCollection,
   },
 
   // Nuxt Color Mode

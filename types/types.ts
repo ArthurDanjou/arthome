@@ -4,6 +4,13 @@ export const COLORS = ['gray', 'slate', 'zinc', 'neutral', 'stone', 'red', 'oran
 
 export const Subscription = ['free', 'paid'] as const
 
+export const IconsCollection = [
+  'ph',
+  'heroicons',
+  'vscode-icons',
+  'simple-icons',
+] as const
+
 // Category
 export const CreateCategorySchema = z.object({
   name: z.string().min(4).max(20),

@@ -1,11 +1,12 @@
+import { IconsCollection } from '~~/types/types'
+
 export default defineEventHandler(async (event) => {
-  const collections = ['ph', 'heroicons']
   const { query } = getQuery(event)
 
   const response = await $fetch('https://api.iconify.design/search', {
     params: {
       query,
-      prefixes: collections.join(','),
+      prefixes: IconsCollection.join(','),
     },
   })
 
