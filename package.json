@@ -4,9 +4,10 @@
   "private": true,
   "packageManager": "pnpm@9.5.0",
   "scripts": {
-    "dev": "nuxt dev --host",
-    "remote": "nuxt dev --remote --host",
-    "postinstall": "nuxt prepare && node script.cjs",
+    "dev": "nuxi dev --host",
+    "build": "nuxi build",
+    "preview": "nuxi preview",
+    "postinstall": "nuxi prepare && node script.cjs",
     "lint:fix": "eslint . --fix",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
