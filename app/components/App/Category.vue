@@ -18,7 +18,7 @@ const { canCreateTabInCategory } = await useUserLimits()
         {{ category.name }}
       </h1>
     </div>
-    <div class="flex gap-4 mt-4">
+    <div class="flex gap-4 mt-4 items-center">
       <UButton
         v-if="canCreateTabInCategory(category.id)"
         color="gray"
