@@ -83,7 +83,7 @@ defineShortcuts({
         label="Delete account"
       />
     </div>
-    <UForm class="space-y-2 md:w-2/3" :schema="UpdateUserSchema" :state="state" @submit="handleUpdate">
+    <UForm class="space-y-4 md:w-2/3" :schema="UpdateUserSchema" :state="state" @submit="handleUpdate">
       <UFormGroup label="Username" name="username">
         <UInput v-model="state.username" type="text" />
       </UFormGroup>
@@ -92,18 +92,18 @@ defineShortcuts({
         <UInput v-model="state.name" type="text" />
       </UFormGroup>
 
-      <UFormGroup label="Avatar" name="avatar">
+      <UFormGroup label="Avatar" name="avatar" hint="Max size: 4MB">
         <UInput type="file" size="sm" accept="image/*" hidden @change="uploadAvatar" />
+        <UButton
+          v-if="user?.avatar"
+          variant="outline"
+          color="red"
+          class="mt-2"
+          label="Delete avatar"
+          size="xs"
+          @click.prevent="deleteAvatar"
+        />
       </UFormGroup>
-
-      <UButton
-        v-if="user?.avatar"
-        variant="outline"
-        color="red"
-        label="Delete avatar"
-        size="xs"
-        @click.prevent="deleteAvatar"
-      />
 
       <UFormGroup label="Email" name="email">
         <UInput v-model="state.email" type="text" disabled />
@@ -121,7 +121,7 @@ defineShortcuts({
         <UInput v-model="state.location" type="text" />
       </UFormGroup>
 
-      <UFormGroup label="Page private" name="private" :description="state.private ? 'Your page is private' : 'Your page is public'">
+      <UFormGroup name="private" :label="state.private ? 'Your page is private' : 'Your page is public'">
         <UToggle
           v-model="state.private"
           on-icon="i-ph:lock-key-duotone"
