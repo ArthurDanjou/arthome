@@ -27,7 +27,7 @@ if (import.meta.server) {
     <h1 class="tracking-widest text-4xl font-bold text-black dark:text-white mb-12">
       ArtHome
     </h1>
-    <div class="w-full md:w-1/3">
+    <div class="w-full lg:w-1/3">
       <UAlert
         v-if="message"
         class="mb-8"
