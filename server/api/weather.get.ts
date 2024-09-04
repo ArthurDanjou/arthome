@@ -1,6 +1,6 @@
 import type { OpenWeatherType, WeatherType } from '~~/types/types'
 
-export default defineEventHandler(async (event) => {
+export default defineCachedEventHandler(async (event) => {
   const config = useRuntimeConfig(event)
   const { user } = await requireUserSession(event)
   const query = getQuery(event)
@@ -33,4 +33,7 @@ export default defineEventHandler(async (event) => {
     },
     wind: openWeather.wind.speed,
   } as WeatherType
+}, {
+  maxAge: 60 * 60 * 3,
+  name: 'weather',
 })
