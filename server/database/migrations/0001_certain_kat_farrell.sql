@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `weather_tab` integer DEFAULT 0;

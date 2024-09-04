@@ -53,6 +53,7 @@ export default oauthGoogleEventHandler({
       location: 'unknown',
       private: false,
       subscription: 'free',
+      weatherTab: false,
     })
 
     await replaceUserSession(event, {

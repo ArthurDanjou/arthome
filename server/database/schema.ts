@@ -17,6 +17,7 @@ export const users = sqliteTable('users', {
   private: integer('private', { mode: 'boolean' }).default(false),
   language: text('language').default('en-EN'),
   location: text('location').default('unknown'),
+  weatherTab: integer('weather_tab', { mode: 'boolean' }).default(0),
   subscription: text('subscription', { enum: Subscription }).default('free'),
   ...timestamps,
 })

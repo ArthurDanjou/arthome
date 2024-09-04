@@ -14,6 +14,7 @@ const { user, loggedIn } = await useUserSession()
 const { categories } = await useCategories()
 const { getTabsForCategory } = await useTabs()
 const { canCreateCategory } = await useUserLimits()
+const { toggleWeatherTab } = await useUser()
 
 // Modals
 const createCategoryModal = ref(false)
@@ -46,7 +47,7 @@ function openCreateTab(category: CategoryType) {
 const currentEditCategory = ref<CategoryType | null>(null)
 
 // DropDown Items
-const items = [[
+const itemsCategory = [[
   {
     label: 'Edit Category',
     icon: 'i-ph:pencil-duotone',
@@ -66,6 +67,21 @@ const items = [[
     click: category => openDeleteCategoryModal(category),
   },
 ]]
+
+const itemsSpecialTabs = computed(() => [[
+  {
+    label: user.value.weatherTab ? 'Remove Weather Tab' : 'Add Weather Tab',
+    icon: user.value.weatherTab ? 'i-ph:cloud-slash-duotone' : 'i-ph:cloud-duotone',
+    click: async () => await toggleWeatherTab(),
+  },
+  /**
+   * {
+   *     label: 'Add Clock tab',
+   *     icon: 'i-ph:clock-duotone',
+   *     click: () => console.log('Add Weather Tab'),
+   *   },
+   */
+]])
 
 defineShortcuts({
   c: () => {
@@ -118,7 +134,7 @@ defineShortcuts({
         </h3>
       </div>
     </section>
-    <AppWeather />
+    <AppWeather v-if="user.weatherTab" />
     <div class="flex justify-end my-8 gap-4">
       <UButton
         v-if="canCreateCategory()"
@@ -144,6 +160,18 @@ defineShortcuts({
           <UKbd>C</UKbd>
         </UButton>
       </UTooltip>
+      <UDropdown
+        :items="itemsSpecialTabs"
+        :popper="{ placement: 'bottom-end', arrow: true }"
+        :ui="{ container: 'group z-50', width: 'w-40', shadow: 'shadow-xl' }"
+      >
+        <UButton
+          color="white"
+          variant="solid"
+          size="xl"
+          icon="i-ph:plus-square-duotone"
+        />
+      </UDropdown>
     </div>
     <section v-if="categories">
       <div v-if="categories.length > 0" class="space-y-12">
@@ -152,7 +180,7 @@ defineShortcuts({
           :key="category.id"
         >
           <AppCategory
-            :dropdown-items="items"
+            :dropdown-items="itemsCategory"
             :category="category"
             @create-tab="openCreateTab(category)"
           />

@@ -1,5 +1,22 @@
 export async function useUser() {
-  const { fetch, session } = useUserSession()
+  const { fetch, user } = useUserSession()
+
+  async function toggleWeatherTab() {
+    const weatherTab = !user.value.weatherTab
+    try {
+      await $fetch('/api/users/me', {
+        method: 'PATCH',
+        body: JSON.stringify({
+          weatherTab,
+        }),
+      })
+      await fetch()
+      useSuccessToast(weatherTab ? 'Weather tab enabled!' : 'Weather tab disabled!')
+    }
+    catch (error) {
+      useErrorToast('An error occurred while updating the weather tab', String(error))
+    }
+  }
 
   async function deleteAvatar() {
     try {
@@ -54,5 +71,6 @@ export async function useUser() {
     deleteAvatar,
     uploadAvatar,
     updateUser,
+    toggleWeatherTab,
   }
 }

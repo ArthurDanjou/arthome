@@ -15,6 +15,7 @@ declare module '#auth-utils' {
     language: string
     location: string
     subscription: Subscription
+    weatherTab: boolean
   }
 
   interface UserSession {

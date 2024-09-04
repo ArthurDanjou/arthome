@@ -75,6 +75,7 @@ export const UpdateUserSchema = z.object({
   location: z.string().optional(),
   language: z.string().optional(),
   private: z.boolean().optional().default(false),
+  weatherTab: z.boolean().optional().default(false),
 })
 export const UpdateUserSchemaType = z.infer<typeof UpdateUserSchema>
 

@@ -52,6 +52,7 @@ export default oauthGitHubEventHandler({
       location: 'unknown',
       private: false,
       subscription: 'free',
+      weatherTab: false,
     })
 
     await replaceUserSession(event, {
