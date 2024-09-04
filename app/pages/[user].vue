@@ -68,7 +68,7 @@ function visitLink(link: string) {
       />
     </div>
     <section v-else>
-      <section class="flex flex-col md:flex-row items-center justify-center md:w-2/3 mx-auto gap-4 md:gap-8">
+      <section class="flex flex-col mb-8 md:flex-row items-center justify-center md:w-2/3 mx-auto gap-4 md:gap-8">
         <div>
           <AppAvatar size="5xl" :src="userDetails.avatar" />
         </div>

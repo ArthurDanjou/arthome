@@ -118,7 +118,7 @@ defineShortcuts({
         </h3>
       </div>
     </section>
-    <div class="flex justify-end mb-8 gap-4">
+    <div class="flex justify-end my-8 gap-4">
       <UButton
         v-if="canCreateCategory()"
         icon="i-ph:folder-simple-plus-duotone"
