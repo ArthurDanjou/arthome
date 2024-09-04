@@ -59,7 +59,7 @@ function visitLink(clickType: 'self' | 'extern') {
   <UCard
     :ui="{
       body: { base: 'h-full relative z-20' },
-      background: `h-full duration-300 bg-white dark:bg-gray-900 ${editMode ? '' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}`,
+      background: `h-full duration-300 bg-white dark:bg-gray-900 ${editMode ? '' : 'hover:bg-zinc-100 dark:hover:bg-zinc-800'}`,
     }"
     :class="editMode ? 'animate-wiggle' : 'cursor-pointer'"
     @click.left="visitLink('self')"

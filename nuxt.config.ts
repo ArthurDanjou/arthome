@@ -85,5 +85,9 @@ export default defineNuxtConfig({
       url: '',
       dir: './server/db',
     },
+    openWeather: {
+      apiKey: '',
+      units: '',
+    },
   },
 })

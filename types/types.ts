@@ -80,11 +80,16 @@ export const UpdateUserSchemaType = z.infer<typeof UpdateUserSchema>
 
 export interface OpenWeatherType {
   weather: Array<{
+    main: string
     description: string
   }>
-  main: {
+  temp: {
     feels_like: number
+    temp_min: number
+    temp_max: number
+    humidity: number
   }
+  wind: { speed: number }
   name: string
 }
 
@@ -94,7 +99,13 @@ export interface WeatherType {
     type: string
     description: string
   }
-  temp: number
+  temp: {
+    feels_like: number
+    min: number
+    max: number
+    humidity: number
+  }
+  wind: number
 }
 
 export const locales = [

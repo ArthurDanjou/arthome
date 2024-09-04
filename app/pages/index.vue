@@ -118,6 +118,7 @@ defineShortcuts({
         </h3>
       </div>
     </section>
+    <AppWeather />
     <div class="flex justify-end my-8 gap-4">
       <UButton
         v-if="canCreateCategory()"
