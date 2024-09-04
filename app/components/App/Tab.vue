@@ -48,9 +48,9 @@ function openDeleteTabModal(tab: TabType) {
   deleteTabModal.value = true
 }
 
-function visitLink() {
+function visitLink(clickType: 'self' | 'extern') {
   if (!props.editMode) {
-    window.open(props.tab.link, '_blank')
+    window.open(props.tab.link, clickType === 'self' ? '_self' : '_blank')
     // todo: add view count
   }
 }
@@ -63,7 +63,10 @@ function visitLink() {
       background: `h-full duration-300 bg-white dark:bg-gray-900 ${editMode ? '' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}`,
     }"
     :class="editMode ? 'animate-wiggle' : 'cursor-pointer'"
-    @click.prevent="visitLink"
+    @click.left="visitLink('self')"
+    @click.right="visitLink('extern')"
+    @click.prevent="visitLink('self')"
+    @click.middle="visitLink('extern')"
   >
     <div v-show="tab.primary" class="absolute flex h-3 w-3 -left-1 -top-1">
       <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" :class="`bg-${tab.color}-400`" />
