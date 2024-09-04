@@ -65,13 +65,19 @@ defineShortcuts({
 
 <template>
   <div class="flex flex-col md:flex-row gap-4">
-    <div class="md:w-1/3 flex flex-col justify-between gap-4">
-      <div class="md:mt-32 flex flex-col items-center">
+    <div class="md:w-1/2 flex flex-col justify-between gap-4">
+      <div class="md:mt-32 flex flex-col items-center space-y-4">
         <AppAvatar size="5xl" :src="user.avatar" />
-        <h1 class="text-4xl font-bold my-4">
+        <h1 class="text-4xl font-bold">
           {{ user.name }}
         </h1>
-        <p>{{ user.description }}</p>
+        <p class="text-center">
+          {{ user.description }}
+        </p>
+        <div class="flex items-center gap-2">
+          <UIcon name="i-ph:map-pin-area-duotone" />
+          <p>{{ user.location }}</p>
+        </div>
       </div>
 
       <UButton
@@ -83,7 +89,7 @@ defineShortcuts({
         label="Delete account"
       />
     </div>
-    <UForm class="space-y-4 md:w-2/3" :schema="UpdateUserSchema" :state="state" @submit="handleUpdate">
+    <UForm class="space-y-4 md:w-1/2" :schema="UpdateUserSchema" :state="state" @submit="handleUpdate">
       <UFormGroup label="Username" name="username">
         <UInput v-model="state.username" type="text" />
       </UFormGroup>
@@ -110,7 +116,7 @@ defineShortcuts({
       </UFormGroup>
 
       <UFormGroup label="Description" name="description">
-        <UTextarea v-model="state.description" autoresize :rows="2" />
+        <UTextarea v-model="state.description" autoresize :maxrows="4" />
       </UFormGroup>
 
       <UFormGroup label="Language" name="language">
