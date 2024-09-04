@@ -5,6 +5,10 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-08-21',
 
+  experimental: {
+    buildCache: true,
+  },
+
   devServer: {
     host: '127.0.0.1',
   },
