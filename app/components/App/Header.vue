@@ -112,8 +112,8 @@ defineShortcuts({
         </div>
       </UContainer>
     </header>
-    <USlideover v-model="isSettingsOpen">
-      <UCard class="flex flex-col flex-1" :ui="{ body: { base: 'flex-1' }, ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
+    <UModal v-model="isSettingsOpen" :ui="{ width: 'w-full sm:max-w-5xl' }">
+      <UCard class="flex flex-col flex-1" :ui="{ body: { base: 'overflow-scroll' }, ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
         <template #header>
           <div class="flex items-center justify-between">
             <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
@@ -124,24 +124,9 @@ defineShortcuts({
         </template>
 
         <template #default>
-          <div class="space-y-12 overflow-auto">
-            <div>
-              <AppUserSettingsForm :user="user" />
-            </div>
-          </div>
-        </template>
-
-        <template #footer>
-          <UButton
-            color="red"
-            variant="solid"
-            icon="i-ph:trash-duotone"
-            block
-          >
-            Delete account
-          </UButton>
+          <AppUserSettingsForm :user="user" @close-modal="isSettingsOpen = false" />
         </template>
       </UCard>
-    </USlideover>
+    </UModal>
   </div>
 </template>

@@ -8,6 +8,8 @@ const props = defineProps<{
   user: UserSession
 }>()
 
+const emit = defineEmits(['closeModal'])
+
 const state = reactive({
   name: undefined,
   username: undefined,
@@ -30,7 +32,20 @@ watchEffect(() => {
 
 const { deleteAvatar, uploadAvatar, updateUser } = await useUser()
 
+const hasChanged = computed(() => {
+  return (
+    state.name !== props.user.name
+    || state.username !== props.user.username
+    || state.private !== props.user.private
+    || state.description !== props.user.description
+    || state.language !== locales.find(locale => locale.locale === props.user.language).locale
+    || state.location !== props.user.location
+  )
+})
+
+const loading = ref(false)
 async function handleUpdate(event: FormSubmitEvent<UpdateUserSchemaType>) {
+  loading.value = true
   await updateUser({
     username: event.data.username,
     name: event.data.name,
@@ -39,66 +54,102 @@ async function handleUpdate(event: FormSubmitEvent<UpdateUserSchemaType>) {
     language: event.data.language,
     private: event.data.private,
   })
+  loading.value = false
 }
+
+const { user } = useUserSession()
+defineShortcuts({
+  escape: () => emit('closeModal'),
+})
 </script>
 
 <template>
-  <UForm :schema="UpdateUserSchema" :state="state" class="space-y-4 p-1" @submit="handleUpdate">
-    <UFormGroup label="Username" name="username">
-      <UInput v-model="state.username" type="text" />
-    </UFormGroup>
+  <div class="flex flex-col md:flex-row gap-4">
+    <div class="md:w-1/3 flex flex-col justify-between gap-4">
+      <div class="md:mt-32 flex flex-col items-center">
+        <AppAvatar size="5xl" :src="user.avatar" />
+        <h1 class="text-4xl font-bold my-4">
+          {{ user.name }}
+        </h1>
+        <p>{{ user.description }}</p>
+      </div>
 
-    <UFormGroup label="Name" name="name">
-      <UInput v-model="state.name" type="text" />
-    </UFormGroup>
-
-    <UFormGroup label="Avatar" name="avatar">
-      <UInput type="file" size="sm" accept="image/*" hidden @change="uploadAvatar" />
-    </UFormGroup>
-
-    <UButton
-      v-if="user?.avatar"
-      variant="outline"
-      color="red"
-      label="Delete avatar"
-      size="xs"
-      @click.prevent="deleteAvatar"
-    />
-
-    <UFormGroup label="Email" name="email">
-      <UInput v-model="state.email" type="text" disabled />
-    </UFormGroup>
-
-    <UFormGroup label="Description" name="description">
-      <UTextarea v-model="state.description" autoresize :rows="2" />
-    </UFormGroup>
-
-    <UFormGroup label="Language" name="language">
-      <USelect v-model="state.language" :options="locales" option-attribute="label" value-attribute="locale" />
-    </UFormGroup>
-
-    <UFormGroup label="Location" name="location">
-      <UInput v-model="state.location" type="text" />
-    </UFormGroup>
-
-    <UFormGroup label="Page private" name="private" :description="state.private ? 'Your page is private' : 'Your page is public'">
-      <UToggle
-        v-model="state.private"
-        on-icon="i-ph:lock-key-duotone"
-        off-icon="i-ph:users-four-duotone"
-        :model-value="state.private"
-        size="lg"
+      <UButton
+        class="hidden md:flex"
         color="red"
+        variant="solid"
+        icon="i-ph:trash-duotone"
+        block
+        label="Delete account"
       />
-    </UFormGroup>
+    </div>
+    <UForm class="space-y-2 md:w-2/3" :schema="UpdateUserSchema" :state="state" @submit="handleUpdate">
+      <UFormGroup label="Username" name="username">
+        <UInput v-model="state.username" type="text" />
+      </UFormGroup>
+
+      <UFormGroup label="Name" name="name">
+        <UInput v-model="state.name" type="text" />
+      </UFormGroup>
+
+      <UFormGroup label="Avatar" name="avatar">
+        <UInput type="file" size="sm" accept="image/*" hidden @change="uploadAvatar" />
+      </UFormGroup>
+
+      <UButton
+        v-if="user?.avatar"
+        variant="outline"
+        color="red"
+        label="Delete avatar"
+        size="xs"
+        @click.prevent="deleteAvatar"
+      />
+
+      <UFormGroup label="Email" name="email">
+        <UInput v-model="state.email" type="text" disabled />
+      </UFormGroup>
+
+      <UFormGroup label="Description" name="description">
+        <UTextarea v-model="state.description" autoresize :rows="2" />
+      </UFormGroup>
+
+      <UFormGroup label="Language" name="language">
+        <USelect v-model="state.language" :options="locales" option-attribute="label" value-attribute="locale" />
+      </UFormGroup>
+
+      <UFormGroup label="Location" name="location">
+        <UInput v-model="state.location" type="text" />
+      </UFormGroup>
+
+      <UFormGroup label="Page private" name="private" :description="state.private ? 'Your page is private' : 'Your page is public'">
+        <UToggle
+          v-model="state.private"
+          on-icon="i-ph:lock-key-duotone"
+          off-icon="i-ph:users-four-duotone"
+          :model-value="state.private"
+          size="lg"
+          color="red"
+        />
+      </UFormGroup>
+
+      <UButton
+        :disabled="!hasChanged"
+        :loading="loading"
+        type="submit"
+        :color="hasChanged ? 'green' : 'gray'"
+        label="Update Profile"
+      />
+    </UForm>
 
     <UButton
-      type="submit"
+      class="md:hidden"
+      color="red"
+      variant="solid"
+      icon="i-ph:trash-duotone"
       block
-      color="gray"
-      label="Update Profile"
+      label="Delete account"
     />
-  </UForm>
+  </div>
 </template>
 
 <style scoped>
