@@ -4,7 +4,7 @@ const { user, loggedIn, clear } = await useUserSession()
 const isSettingsOpen = ref(false)
 
 const isDark = computed(() => colorMode.preference === 'dark')
-const items = [
+const items = computed(() => [
   [{
     slot: 'account',
     disabled: true,
@@ -21,7 +21,7 @@ const items = [
     shortcut: 'S',
   }, {
     label: isDark.value ? 'Light mode' : 'Dark mode',
-    icon: isDark.value ? 'i-ph:moon-duotone' : 'i-ph:sun-duotone',
+    icon: isDark.value ? 'i-ph:sun-duotone' : 'i-ph:moon-duotone',
     action: () => toggleColorMode(),
     shortcut: 'T',
   }],
@@ -31,7 +31,7 @@ const items = [
     icon: 'i-ph:sign-out-bold',
     shortcut: 'L',
   }],
-]
+])
 
 async function logout() {
   await clear()
