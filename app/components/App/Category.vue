@@ -11,7 +11,7 @@ const { canCreateTabInCategory } = await useUserLimits()
 </script>
 
 <template>
-  <div v-if="category" class="flex flex-wrap items-center mb-4" :class="category.nameVisible ? 'justify-between' : 'justify-end'">
+  <div v-if="category" class="flex flex-wrap items-center mb-4 space-y-4" :class="category.nameVisible ? 'justify-between' : 'justify-end'">
     <div v-if="category.nameVisible" class="flex items-center gap-2 md:mb-4" :class="`text-${category.color}-500`">
       <UIcon :name="category.icon" size="28" />
       <h1 class="font-bold text-2xl">
