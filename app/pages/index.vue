@@ -111,16 +111,18 @@ defineShortcuts({
 
 <template>
   <main v-if="user && loggedIn" class="my-12">
-    <div v-if="date" class="flex flex-col items-center mb-12">
-      <h1 class="text-6xl md:text-9xl font-bold">
-        {{ useDateFormat(date, 'HH') }}
-        <span class="animate-pulse">:</span>
-        {{ useDateFormat(date, 'mm') }}
-      </h1>
-      <h1 class="text-2xl md:text-5xl">
-        {{ useDateFormat(date, 'dddd D MMMM YYYY', { locales: user.language }) }}
-      </h1>
-    </div>
+    <ClientOnly>
+      <div v-if="date" class="flex flex-col items-center mb-12">
+        <h1 class="text-6xl md:text-9xl font-bold">
+          {{ useDateFormat(date, 'HH') }}
+          <span class="animate-pulse">:</span>
+          {{ useDateFormat(date, 'mm') }}
+        </h1>
+        <h1 class="text-2xl md:text-5xl">
+          {{ useDateFormat(date, 'dddd D MMMM YYYY', { locales: user.language }) }}
+        </h1>
+      </div>
+    </ClientOnly>
     <section class="flex flex-col md:flex-row items-center justify-center md:w-2/3 mx-auto gap-4 md:gap-8">
       <div>
         <AppAvatar size="5xl" :src="user.avatar" />

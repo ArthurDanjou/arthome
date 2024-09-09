@@ -34,16 +34,18 @@ function visitLink(clickType: 'self' | 'extern') {
 
 <template>
   <main class="my-12">
-    <div v-if="date" class="flex flex-col items-center mb-12">
-      <h1 class="text-6xl md:text-9xl font-bold">
-        {{ useDateFormat(date, 'HH') }}
-        <span class="animate-pulse">:</span>
-        {{ useDateFormat(date, 'mm') }}
-      </h1>
-      <h1 class="text-2xl md:text-5xl">
-        {{ useDateFormat(date, 'dddd D MMMM YYYY', { locales: userDetails.locale ? userDetails.language : user.locale }) }}
-      </h1>
-    </div>
+    <ClientOnly>
+      <div v-if="date" class="flex flex-col items-center mb-12">
+        <h1 class="text-6xl md:text-9xl font-bold">
+          {{ useDateFormat(date, 'HH') }}
+          <span class="animate-pulse">:</span>
+          {{ useDateFormat(date, 'mm') }}
+        </h1>
+        <h1 class="text-2xl md:text-5xl">
+          {{ useDateFormat(date, 'dddd D MMMM YYYY', { locales: userDetails.locale ? userDetails.language : user.locale }) }}
+        </h1>
+      </div>
+    </ClientOnly>
     <div v-if="userDetails.message || userDetails.private" class="text-center mt-24 space-y-4">
       <div
         class="flex items-center justify-center gap-2 text-3xl"
