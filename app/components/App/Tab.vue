@@ -53,6 +53,30 @@ function visitLink(clickType: 'self' | 'extern') {
     window.open(props.tab.link, clickType === 'self' ? '_self' : '_blank')
   }
 }
+
+const draggedItemIndex = ref(null)
+
+function onDragStart(event, index) {
+  draggedItemIndex.value = index
+  event.dataTransfer.effectAllowed = 'move'
+}
+
+function onDragOver(event) {
+  event.preventDefault() // Allow drop by preventing the default action
+  event.dataTransfer.dropEffect = 'move'
+}
+
+function onDrop(event, index) {
+  event.preventDefault()
+
+  // Swap the dragged item with the dropped position
+  const draggedIndex = draggedItemIndex.value
+  const draggedItem = items.value[draggedIndex]
+  items.value.splice(draggedIndex, 1) // Remove dragged item
+  items.value.splice(index, 0, draggedItem) // Insert dragged item at new index
+
+  draggedItemIndex.value = null // Reset dragged index
+}
 </script>
 
 <template>
@@ -62,6 +86,7 @@ function visitLink(clickType: 'self' | 'extern') {
       background: `h-full duration-300 bg-white dark:bg-gray-900 ${editMode ? '' : 'hover:bg-zinc-100 dark:hover:bg-zinc-800'}`,
     }"
     :class="editMode ? 'animate-wiggle' : 'cursor-pointer'"
+    :draggable="editMode"
     @click.left="visitLink('self')"
     @click.right="visitLink('extern')"
     @click.prevent="visitLink('self')"
@@ -85,7 +110,7 @@ function visitLink(clickType: 'self' | 'extern') {
       <UDropdown
         :items="items"
         :popper="{ placement: 'bottom-end', arrow: true }"
-        :ui="{ container: 'z-40 group', width: 'w-40', shadow: 'shadow-2xl', wrapper: 'absolute inline-flex -top-3 -right-3' }"
+        :ui="{ container: 'z-50 group', width: 'w-40', shadow: 'shadow-2xl', wrapper: 'absolute inline-flex -top-3 -right-3' }"
       >
         <UButton
           v-show="editMode"

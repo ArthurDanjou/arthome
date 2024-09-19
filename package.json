@@ -5,6 +5,7 @@
   "packageManager": "pnpm@9.5.0",
   "scripts": {
     "dev": "nuxt dev --host",
+    "remote": "nuxt dev --host --remote",
     "build": "nuxt build",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare && node script.cjs",

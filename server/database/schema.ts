@@ -1,7 +1,7 @@
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 import { relations } from 'drizzle-orm'
-import { id, timestamps } from '../utils/dbFields'
+import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 import { Subscription } from '../../types/types'
+import { id, timestamps } from '../utils/dbFields'
 
 export const users = sqliteTable('users', {
   id,
@@ -17,7 +17,7 @@ export const users = sqliteTable('users', {
   private: integer('private', { mode: 'boolean' }).default(false),
   language: text('language').default('en-EN'),
   location: text('location').default('unknown'),
-  weatherTab: integer('weather_tab', { mode: 'boolean' }).default(0),
+  weatherTab: integer('weather_tab', { mode: 'boolean' }).default(false),
   subscription: text('subscription', { enum: Subscription }).default('free'),
   ...timestamps,
 })
@@ -28,6 +28,7 @@ export const categories = sqliteTable('categories', {
   nameVisible: integer('name_visible', { mode: 'boolean' }).default(true),
   icon: text('icon').default('i-ph:circle-wavy-question-duotone'),
   color: text('color').default('gray'),
+  grid: text('grid', { mode: 'json' }).default(''),
   userId: integer('user_id')
     .notNull()
     .references(() => users.id, { onDelete: 'cascade' }),

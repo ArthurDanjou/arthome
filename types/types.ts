@@ -25,6 +25,7 @@ export const UpdateCategorySchema = z.object({
   icon: z.string().optional(),
   color: z.string().optional(),
   nameVisible: z.boolean().optional().default(false),
+  grid: z.string().optional(),
 })
 export const UpdateCategorySchemaType = z.infer<typeof UpdateCategorySchema>
 
@@ -34,6 +35,7 @@ export interface CategoryType {
   icon: string
   color: string
   nameVisible: boolean
+  grid: GridType
 }
 
 // Tab
@@ -78,6 +80,13 @@ export const UpdateUserSchema = z.object({
   weatherTab: z.boolean().optional().default(false),
 })
 export const UpdateUserSchemaType = z.infer<typeof UpdateUserSchema>
+
+export interface GridType {
+  tabs: Array<{
+    tabId: number
+    orderId: number
+  }>
+}
 
 export interface OpenWeatherType {
   weather: Array<{

@@ -6,7 +6,7 @@ export default defineCachedEventHandler(async (event) => {
   const query = getQuery(event)
 
   if (Number(query.lon) === Infinity || Number(query.lat) === Infinity) {
-    return createError('Invalid coordinates')
+    return sendNoContent(event, 500)
   }
 
   const openWeather = await $fetch<OpenWeatherType>('https://api.openweathermap.org/data/2.5/weather', {
@@ -34,6 +34,6 @@ export default defineCachedEventHandler(async (event) => {
     wind: openWeather.wind.speed,
   } as WeatherType
 }, {
-  maxAge: 60 * 60 * 3,
+  maxAge: 1,
   name: 'weather',
 })

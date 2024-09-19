@@ -3,13 +3,13 @@ import type { WeatherType } from '~~/types/types'
 
 const { coords, error } = useGeolocation()
 
-const { data, status, refresh } = await useAsyncData<WeatherType>(async () => await useRequestFetch<WeatherType>()('/api/weather', {
+const { data, status, refresh, error: errorFe } = await useAsyncData<WeatherType>(async () => await useRequestFetch<WeatherType>()('/api/weather', {
   method: 'GET',
   query: {
     lon: coords.value.longitude,
     lat: coords.value.latitude,
   },
-}))
+}), { lazy: true, immediate: false })
 
 watchOnce(coords, async () => await refresh())
 
